@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BugCatcher.DAL.RepositoryAbstraction
+namespace BugCatcher.DALImplementation.RepositoryAbstraction
 {
     public interface IReportRepository
     {
@@ -15,6 +15,6 @@ namespace BugCatcher.DAL.RepositoryAbstraction
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        List<Report> GetReport(ReportFetchingFilter filter);
+        IList<Report> GetReport(ReportFetchingFilter filter);
     }
 }

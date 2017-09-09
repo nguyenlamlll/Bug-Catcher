@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BugCatcher.Web.Data;
+using BugCatcher.DALImplementation.Data;
 using BugCatcher.Web.Services;
+using BugCatcher.Infrastructure.Services;
 
 namespace BugCatcher.Web.Pages.Account.Manage
 {

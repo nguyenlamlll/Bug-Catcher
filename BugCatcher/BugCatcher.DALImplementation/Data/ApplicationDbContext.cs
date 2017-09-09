@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BugCatcher.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 
-namespace BugCatcher.Web.Data
+namespace BugCatcher.DALImplementation.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -21,5 +23,9 @@ namespace BugCatcher.Web.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Build> Buids { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Report> Reports { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using BugCatcher.Web.Services;
+using BugCatcher.Infrastructure.Services;
 
 namespace BugCatcher.Web.Services
 {
