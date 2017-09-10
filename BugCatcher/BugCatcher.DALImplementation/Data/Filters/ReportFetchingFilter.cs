@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BugCatcher.DAL.Models.Filters
+namespace BugCatcher.DALImplementation.Data.Filters
 {
     /// <summary>
     /// Filter object used in fetching records in Report Table.

@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BugCatcher.DALImplementation.Data;
 using BugCatcher.Infrastructure.Services;
+using BugCatcher.Service.Abstraction;
+using BugCatcher.Service.Implementation;
 
 namespace BugCatcher.Web
 {
@@ -36,6 +38,7 @@ namespace BugCatcher.Web
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IReportService, ReportService>();
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

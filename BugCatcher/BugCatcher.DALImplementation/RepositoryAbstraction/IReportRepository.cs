@@ -1,5 +1,5 @@
 ﻿using BugCatcher.DAL.Models;
-using BugCatcher.DAL.Models.Filters;
+using BugCatcher.DALImplementation.Data.Filters;
 using System;
 using System.Collections.Generic;
 using System.Text;

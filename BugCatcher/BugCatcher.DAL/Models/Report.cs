@@ -26,6 +26,10 @@ namespace BugCatcher.DAL.Models
         public Guid BuildId { get; set; }
         public Build Build { get; set; }
 
+        [ForeignKey("Reporter")]
+        public Guid ReporterId { get; set; }
+        public ApplicationUser Reporter { get; set; }
+
         #endregion
     }
 }

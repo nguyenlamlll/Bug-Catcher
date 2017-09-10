@@ -11,7 +11,7 @@ namespace BugCatcher.Web.Pages.Report
     public class IndexModel : PageModel
     {
 
-        public IList<ReportInformation> BugReports { get; set; }
+        public IList<ReportQueryInfo> BugReports { get; set; }
 
         public void OnGet()
         {
