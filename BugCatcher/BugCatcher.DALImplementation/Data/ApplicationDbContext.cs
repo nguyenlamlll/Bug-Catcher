@@ -6,10 +6,16 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BugCatcher.DAL.Models;
 using Microsoft.AspNetCore.Identity;
+using BugCatcher.DAL.Models.Identity;
 
 namespace BugCatcher.DALImplementation.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid
+        //, 
+        //IdentityUserClaim<Guid>, IdentityUserRole<Guid>, 
+        //IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>,
+        //IdentityUserToken<Guid>
+        >
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -15,6 +15,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BugCatcher.DALImplementation\BugCatcher.DALImplementation.csproj" />
+    <ProjectReference Include="..\BugCatcher.DAL\BugCatcher.DAL.csproj" />
     <ProjectReference Include="..\BugCatcher.Infrastructure\BugCatcher.Infrastructure.csproj" />
     <ProjectReference Include="..\BugCatcher.Service\BugCatcher.Service.csproj" />
   </ItemGroup>

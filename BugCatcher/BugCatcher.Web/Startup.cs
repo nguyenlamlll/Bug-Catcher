@@ -10,9 +10,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Models;
 using BugCatcher.Infrastructure.Services;
 using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Implementation;
+using BugCatcher.DAL.Models.Identity;
 
 namespace BugCatcher.Web
 {
@@ -32,7 +34,7 @@ namespace BugCatcher.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly("BugCatcher.DALImplementation")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

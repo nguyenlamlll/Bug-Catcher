@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Models;
 
 namespace BugCatcher.Web.Pages.Account
 {
