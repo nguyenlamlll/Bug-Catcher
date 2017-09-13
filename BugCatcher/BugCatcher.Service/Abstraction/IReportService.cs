@@ -16,13 +16,13 @@ namespace BugCatcher.Service.Abstraction
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ReportQueryInfo GetReport(Guid id);
+        ReportQueryData GetReport(Guid id);
 
         /// <summary>
         /// Gets report based on a given set of criterias.
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        List<ReportQueryInfo> GetReport (ReportFetchingFilter filter);
+        List<ReportQueryData> GetReport (ReportFetchingFilter filter);
     }
 }

@@ -2,7 +2,7 @@
 @model IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Report Manager";
 }
 <h2>Index</h2>
 <p>
@@ -12,19 +12,19 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BugReport[0].Title)
+                @Html.DisplayNameFor(model => model.BugReports[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BugReport[0].Description)
+                @Html.DisplayNameFor(model => model.BugReports[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BugReport[0].DateOfCreated)
+                @Html.DisplayNameFor(model => model.BugReports[0].DateOfCreated)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.BugReport)
+        @foreach (var item in Model.BugReports)
         {
             <tr>
                 <td>

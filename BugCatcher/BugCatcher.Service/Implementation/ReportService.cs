@@ -8,6 +8,7 @@ using BugCatcher.Service.Models.Queries;
 using BugCatcher.DALImplementation.Data.Filters;
 using BugCatcher.Service.Models.Queries.DataConversion;
 using BugCatcher.DAL.Models;
+using BugCatcher.DALImplementation.Repositories;
 
 namespace BugCatcher.Service.Implementation
 {
@@ -15,7 +16,6 @@ namespace BugCatcher.Service.Implementation
     {
         private readonly IReportRepository reportRepository;
         private readonly IAccountRepository accountRepository;
-
         public ReportService(IReportRepository reportRepository, IAccountRepository accountRepository)
         {
             this.reportRepository = reportRepository;
@@ -32,14 +32,13 @@ namespace BugCatcher.Service.Implementation
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ReportQueryInfo IReportService.GetReport(Guid id)
+        ReportQueryData IReportService.GetReport(Guid id)
         {
-            ReportQueryInfo result = null;
+            ReportQueryData queryData = null;
             Report rawReport = null;
             try
             {
                 rawReport = reportRepository.GetReport(id);
-                //ApplicationUser reporter = accountRepository.GetApplicationUser(report.ReporterId);
             }
             catch (Exception) // TO DO: Catch null result exceptions
             {
@@ -47,11 +46,11 @@ namespace BugCatcher.Service.Implementation
             }
             finally
             {
-                result = rawReport.ToReportQueryModel(rawReport.Reporter);
+                queryData = new ReportQueryData(rawReport);
             }
 
-            if (result != null)
-                return result;
+            if (queryData != null)
+                return queryData;
             else
             {
                 throw new Exception("Unknown service error happened while getting report information.");
@@ -63,7 +62,7 @@ namespace BugCatcher.Service.Implementation
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        List<ReportQueryInfo> IReportService.GetReport(ReportFetchingFilter filter)
+        List<ReportQueryData> IReportService.GetReport(ReportFetchingFilter filter)
         {
             throw new NotImplementedException();
         }

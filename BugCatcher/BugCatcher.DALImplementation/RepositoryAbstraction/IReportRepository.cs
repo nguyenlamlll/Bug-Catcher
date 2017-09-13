@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BugCatcher.DALImplementation.RepositoryAbstraction
 {
-    public interface IReportRepository
+    public interface IReportRepository : IDisposable
     {
         Report GetReport(Guid id);
 
@@ -16,5 +16,15 @@ namespace BugCatcher.DALImplementation.RepositoryAbstraction
         /// <param name="filter"></param>
         /// <returns></returns>
         IList<Report> GetReport(ReportFetchingFilter filter);
+
+        /// <summary>
+        /// Create a report.
+        /// </summary>
+        /// <param name="report"></param>
+        void CreateReport(Report report);
+        void DeleteReport(Guid id);
+        void UpdateReport(Report report);
+
+        void Save();
     }
 }

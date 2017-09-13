@@ -10,12 +10,18 @@ using Microsoft.EntityFrameworkCore; //To load related data.
 
 namespace BugCatcher.DALImplementation.Repositories
 {
-    public class ReportRepository : BaseRepository, IReportRepository
+    public class ReportRepository : IReportRepository, IDisposable
     {
-
+        private ApplicationDbContext dbContext;
         public ReportRepository(ApplicationDbContext dbContext)
-            : base(dbContext)
-        { }
+        {
+            this.dbContext = dbContext;
+        }
+
+        void IReportRepository.CreateReport(Report report)
+        {
+            dbContext.Reports.Add(report);
+        }
 
         /// <summary>
         /// Gets a report by its exact Id number.
@@ -24,21 +30,18 @@ namespace BugCatcher.DALImplementation.Repositories
         /// <returns></returns>
         Report IReportRepository.GetReport(Guid id)
         {
-            using (dbContext)
-            {
-                var report = dbContext.Reports
-                    .Include(r => r.Reporter)
-                    .Where(r => r.Id == id)
-                    .SingleOrDefault();
+            var report = dbContext.Reports
+                .Include(r => r.Reporter)
+                .Where(r => r.Id == id)
+                .SingleOrDefault();
 
-                if (report == null)
-                {
-                    throw new Exception(String.Format("There is no report associated with the Id {0}.", id));
-                }
-                else
-                {
-                    return report;
-                }
+            if (report == null)
+            {
+                throw new Exception(String.Format("There is no report associated with the Id {0}.", id));
+            }
+            else
+            {
+                return report;
             }
         }
 
@@ -53,19 +56,53 @@ namespace BugCatcher.DALImplementation.Repositories
         /// <returns></returns>
         IList<Report> IReportRepository.GetReport(ReportFetchingFilter filter)
         {
-            using (dbContext)
+            IList<Report> resultList = (from records in dbContext.Reports
+                                        select records).ToList();
+
+            // Apply filters
+            if (filter.RequiredBuildId != null && filter.RequiredBuildId != Guid.Empty)
+                resultList = (from items in resultList
+                              where items.BuildId == filter.RequiredBuildId
+                              select items).ToList();
+
+            return resultList;
+        }
+
+        void IReportRepository.DeleteReport(Guid id)
+        {
+            Report report = dbContext.Reports.Find(id);
+            report.IsActive = false;
+        }
+
+        void IReportRepository.UpdateReport(Report report)
+        {
+            dbContext.Entry(report).State = EntityState.Modified;
+        }
+
+
+
+        void IReportRepository.Save()
+        {
+            dbContext.SaveChanges();
+        }
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
             {
-                IList<Report> resultList = (from records in dbContext.Reports
-                                            select records).ToList();
-
-                // Apply filters
-                if (filter.RequiredBuildId != null && filter.RequiredBuildId != Guid.Empty)
-                    resultList = (from items in resultList
-                                  where items.BuildId == filter.RequiredBuildId
-                                  select items).ToList();
-
-                return resultList;
+                if (disposing)
+                {
+                    dbContext.Dispose();
+                }
             }
+            this.disposed = true;
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

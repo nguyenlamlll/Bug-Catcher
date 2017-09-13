@@ -15,6 +15,8 @@ using BugCatcher.Infrastructure.Services;
 using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Implementation;
 using BugCatcher.DAL.Models.Identity;
+using BugCatcher.DALImplementation.RepositoryAbstraction;
+using BugCatcher.DALImplementation.Repositories;
 
 namespace BugCatcher.Web
 {
@@ -41,6 +43,10 @@ namespace BugCatcher.Web
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IReportService, ReportService>();
+
+            // Add repositories
+            services.AddTransient<IReportRepository, ReportRepository>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

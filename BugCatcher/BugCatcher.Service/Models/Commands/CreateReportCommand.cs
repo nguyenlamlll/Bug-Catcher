@@ -8,6 +8,8 @@ namespace BugCatcher.Service.Models.Commands
     {
         public string Title { get; set; }
 
+        public Guid ReporterId { get; set; }
+
         public string Description { get; set; }
 
         public string ReproduceSteps { get; set; }
