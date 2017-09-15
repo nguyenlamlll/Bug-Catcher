@@ -1,9 +1,9 @@
-﻿using BugCatcher.DALImplementation.Data;
+﻿using BugCatcher.DAL.Implementation.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BugCatcher.DALImplementation.Repositories
+namespace BugCatcher.DAL.Implementation.Repositories
 {
     public class BaseRepository
     {

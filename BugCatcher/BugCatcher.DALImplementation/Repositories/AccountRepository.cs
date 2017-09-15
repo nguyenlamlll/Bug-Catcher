@@ -1,11 +1,12 @@
-﻿using BugCatcher.DALImplementation.RepositoryAbstraction;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BugCatcher.DAL.Models;
-using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Implementation.Data;
+using BugCatcher.DAL.Implementation.Repositories;
+using BugCatcher.DAL.Abstraction.Repositories;
 
-namespace BugCatcher.DALImplementation.Repositories
+namespace BugCatcher.DAL.Implementation.Repositories
 {
     public class AccountRepository : BaseRepository, IAccountRepository
     {

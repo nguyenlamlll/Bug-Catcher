@@ -7,11 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.Web", "BugCatche
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.DAL", "BugCatcher.DAL\BugCatcher.DAL.csproj", "{4C2A3BC9-87CF-4657-A716-9D2B7F707916}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.DALImplementation", "BugCatcher.DALImplementation\BugCatcher.DALImplementation.csproj", "{E152E437-4E75-4CA0-90F5-536666E8DD73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.DAL.Implementation", "BugCatcher.DALImplementation\BugCatcher.DAL.Implementation.csproj", "{E152E437-4E75-4CA0-90F5-536666E8DD73}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.Infrastructure", "BugCatcher.Infrastructure\BugCatcher.Infrastructure.csproj", "{4F1EF048-AF28-48D9-A422-BF9D3D50F767}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.Service", "BugCatcher.Service\BugCatcher.Service.csproj", "{9D24406D-A889-4C95-9D6D-7C29BE48602A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugCatcher.DAL.Abstraction", "BugCatcher.DAL.Abstraction\BugCatcher.DAL.Abstraction.csproj", "{D1100968-6130-4D22-AF53-BECB78C259ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugCatcher.DAL.Query", "BugCatcher.DAL.Query\BugCatcher.DAL.Query.csproj", "{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +43,14 @@ Global
 		{9D24406D-A889-4C95-9D6D-7C29BE48602A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D24406D-A889-4C95-9D6D-7C29BE48602A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D24406D-A889-4C95-9D6D-7C29BE48602A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1100968-6130-4D22-AF53-BECB78C259ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1100968-6130-4D22-AF53-BECB78C259ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1100968-6130-4D22-AF53-BECB78C259ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1100968-6130-4D22-AF53-BECB78C259ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

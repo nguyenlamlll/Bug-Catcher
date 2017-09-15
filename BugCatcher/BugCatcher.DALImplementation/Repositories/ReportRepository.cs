@@ -1,14 +1,15 @@
-﻿using BugCatcher.DALImplementation.RepositoryAbstraction;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BugCatcher.DAL.Models;
-using BugCatcher.DALImplementation.Data.Filters;
-using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Implementation.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore; //To load related data.
+using BugCatcher.DAL.Implementation.Repositories.ExtensionMethods;
+using BugCatcher.DAL.Abstraction.Repositories;
+using BugCatcher.DAL.Query.Models.Filters;
 
-namespace BugCatcher.DALImplementation.Repositories
+namespace BugCatcher.DAL.Implementation.Repositories
 {
     public class ReportRepository : IReportRepository, IDisposable
     {
@@ -54,16 +55,14 @@ namespace BugCatcher.DALImplementation.Repositories
         ///     initialize the object as it has the default constraints itself.
         /// </param>
         /// <returns></returns>
-        IList<Report> IReportRepository.GetReport(ReportFetchingFilter filter)
+        List<Report> IReportRepository.GetReport(ReportFetchingFilter filter)
         {
-            IList<Report> resultList = (from records in dbContext.Reports
-                                        select records).ToList();
+            List<Report> resultList = dbContext.Reports //.Include(report => report.Build)
+                .ToList();
 
             // Apply filters
-            if (filter.RequiredBuildId != null && filter.RequiredBuildId != Guid.Empty)
-                resultList = (from items in resultList
-                              where items.BuildId == filter.RequiredBuildId
-                              select items).ToList();
+            if (filter.RequiredBuildId.HasValue)
+                resultList = resultList.FilterReportsByBuildId(filter.RequiredBuildId.Value).ToList();
 
             return resultList;
         }
@@ -99,7 +98,7 @@ namespace BugCatcher.DALImplementation.Repositories
             this.disposed = true;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);

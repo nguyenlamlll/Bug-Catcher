@@ -1,10 +1,10 @@
 ﻿using BugCatcher.DAL.Models;
-using BugCatcher.DALImplementation.Data.Filters;
+using BugCatcher.DAL.Query.Models.Filters;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BugCatcher.DALImplementation.RepositoryAbstraction
+namespace BugCatcher.DAL.Abstraction.Repositories
 {
     public interface IReportRepository : IDisposable
     {
@@ -13,9 +13,9 @@ namespace BugCatcher.DALImplementation.RepositoryAbstraction
         /// <summary>
         /// Tries to get reports with a given filter.
         /// </summary>
-        /// <param name="filter"></param>
+        /// <param name="filter">A filter object that inherits from IFilter interface.</param>
         /// <returns></returns>
-        IList<Report> GetReport(ReportFetchingFilter filter);
+        List<Report> GetReport(ReportFetchingFilter filter);
 
         /// <summary>
         /// Create a report.

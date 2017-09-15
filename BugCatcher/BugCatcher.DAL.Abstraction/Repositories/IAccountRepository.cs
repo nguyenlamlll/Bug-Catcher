@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BugCatcher.DALImplementation.RepositoryAbstraction
+namespace BugCatcher.DAL.Abstraction.Repositories
 {
     public interface IAccountRepository
     {

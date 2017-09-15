@@ -9,14 +9,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Implementation.Data;
 using BugCatcher.DAL.Models;
 using BugCatcher.Infrastructure.Services;
 using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Implementation;
 using BugCatcher.DAL.Models.Identity;
-using BugCatcher.DALImplementation.RepositoryAbstraction;
-using BugCatcher.DALImplementation.Repositories;
+using BugCatcher.DAL.Abstraction.Repositories;
+using BugCatcher.DAL.Implementation.Repositories;
 
 namespace BugCatcher.Web
 {

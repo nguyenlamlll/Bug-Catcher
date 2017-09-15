@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using BugCatcher.DALImplementation.Data;
 using BugCatcher.Web.Services;
 using BugCatcher.Infrastructure.Services;
 using BugCatcher.DAL.Models;

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace BugCatcher.DALImplementation.Migrations
+namespace BugCatcher.DAL.Implementation.Migrations
 {
     public partial class CreateNewDatabase : Migration
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BugCatcher.DALImplementation.Data.Filters
+namespace BugCatcher.DAL.Query.Models.Filters
 {
     /// <summary>
     /// Filter object used in fetching records in Report Table.
@@ -10,13 +10,10 @@ namespace BugCatcher.DALImplementation.Data.Filters
     public class ReportFetchingFilter
     {
         private Guid? requiredBuildId = null;
-
-        public Guid RequiredBuildId
+        public Guid? RequiredBuildId
         {
-            get { return requiredBuildId.Value; }
+            get { return requiredBuildId; }
             set { requiredBuildId = value; }
         }
-
-
     }
 }

@@ -3,11 +3,11 @@ using BugCatcher.Service.Models.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using BugCatcher.DALImplementation.Data.Filters;
+using BugCatcher.DAL.Query.Models.Filters;
 
 namespace BugCatcher.Service.Abstraction
 {
-    public interface IReportService
+    public interface IReportService : IDisposable
     {
         void CreateReport(CreateReportCommand command);
 
