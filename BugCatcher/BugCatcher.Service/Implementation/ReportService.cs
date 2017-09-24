@@ -91,6 +91,7 @@ namespace BugCatcher.Service.Implementation
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
+                    reportRepository.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

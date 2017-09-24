@@ -34,7 +34,7 @@ namespace BugCatcher.Web
         {
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("BugCatcher.DALImplementation")));
+                options.UseSqlServer(connectionString, b => b.MigrationsAssembly("BugCatcher.DAL.Implementation")));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -43,10 +43,12 @@ namespace BugCatcher.Web
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IReportService, ReportService>();
+            services.AddTransient<ICompanyService, CompanyService>();
 
             // Add repositories
             services.AddTransient<IReportRepository, ReportRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<ICompanyRepository, CompanyRepository>();
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

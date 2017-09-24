@@ -33,5 +33,7 @@ namespace BugCatcher.DAL.Implementation.Data
         public DbSet<Build> Buids { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyEnrollment> CompanyEnrollments { get; set; }
     }
 }

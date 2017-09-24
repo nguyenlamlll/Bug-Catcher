@@ -5,28 +5,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using BugCatcher.Service.Abstraction;
-using System.ComponentModel.DataAnnotations;
 using BugCatcher.Service.Models.Commands;
+using Microsoft.EntityFrameworkCore;
 
-namespace BugCatcher.Web.Pages.Report
+namespace BugCatcher.Web.Pages.Company
 {
     public class CreateModel : PageModel, IDisposable
     {
-        private readonly IReportService reportService;
-        public CreateModel(IReportService reportService)
+        private ICompanyService companyService;
+        public CreateModel(ICompanyService companyService)
         {
-            this.reportService = reportService;
+            this.companyService = companyService;
         }
-        
-        public void Dispose()
-        {
-            reportService.Dispose();
-        }
-
         public void OnGet()
         {
-        }
 
+        }
+        public void Dispose()
+        {
+            companyService.Dispose();
+        }
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -35,11 +33,12 @@ namespace BugCatcher.Web.Pages.Report
             }
             try
             {
-                reportService.CreateReport(Input);
+                companyService.CreateCompany(Input);
             }
-            catch (Exception)
+            catch (DbUpdateException ex)
             {
-                ModelState.AddModelError(string.Empty, "Unable to save changes. Please try again.");
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Please try again." +
+                    ex.Message);
             }
             this.Dispose();
             return RedirectToPage("Index");
@@ -48,7 +47,6 @@ namespace BugCatcher.Web.Pages.Report
 
 
         [BindProperty]
-        public CreateReportCommand Input { get; set; }
-
+        public CreateCompanyCommand Input { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using BugCatcher.DAL.Query.Models.Filters;
 
 namespace BugCatcher.DAL.Implementation.Repositories
 {
-    public class ReportRepository : IReportRepository, IDisposable
+    public class ReportRepository : IReportRepository//, IDisposable
     {
         private ApplicationDbContext dbContext;
         public ReportRepository(ApplicationDbContext dbContext)
@@ -84,8 +84,9 @@ namespace BugCatcher.DAL.Implementation.Repositories
         {
             dbContext.SaveChanges();
         }
-        private bool disposed = false;
 
+
+        private bool disposed = false;
         protected virtual void Dispose(bool disposing)
         {
             if (!this.disposed)
@@ -98,10 +99,10 @@ namespace BugCatcher.DAL.Implementation.Repositories
             this.disposed = true;
         }
 
-        public void Dispose()
+        void IDisposable.Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
+            //GC.SuppressFinalize(this);
         }
     }
 }
