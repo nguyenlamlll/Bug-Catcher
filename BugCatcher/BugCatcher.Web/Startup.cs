@@ -42,13 +42,20 @@ namespace BugCatcher.Web
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddTransient<IReportService, ReportService>();
-            services.AddTransient<ICompanyService, CompanyService>();
-
-            // Add repositories
-            services.AddTransient<IReportRepository, ReportRepository>();
             services.AddTransient<IAccountRepository, AccountRepository>();
+
+            // ADD REPORT Services
+            services.AddTransient<IReportService, ReportService>();
+            services.AddTransient<IReportRepository, ReportRepository>();
+
+            // Add COMPANY Services
+            services.AddTransient<ICompanyService, CompanyService>();
             services.AddTransient<ICompanyRepository, CompanyRepository>();
+
+            // Add PRODUCT Services
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

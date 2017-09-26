@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BugCatcher.Service.Abstraction;
 using System.ComponentModel.DataAnnotations;
 using BugCatcher.Service.Models.Commands;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugCatcher.Web.Pages.Report
 {
@@ -37,9 +38,9 @@ namespace BugCatcher.Web.Pages.Report
             {
                 reportService.CreateReport(Input);
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
-                ModelState.AddModelError(string.Empty, "Unable to save changes. Please try again.");
+                ModelState.AddModelError("DbError", "Unable to save changes. Please try again.");
             }
             this.Dispose();
             return RedirectToPage("Index");

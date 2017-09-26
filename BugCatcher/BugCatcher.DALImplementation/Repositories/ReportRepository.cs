@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore; //To load related data.
 using BugCatcher.DAL.Implementation.Repositories.ExtensionMethods;
 using BugCatcher.DAL.Abstraction.Repositories;
 using BugCatcher.DAL.Query.Models.Filters;
+using BugCatcher.Exception;
 
 namespace BugCatcher.DAL.Implementation.Repositories
 {
@@ -38,7 +39,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
 
             if (report == null)
             {
-                throw new Exception(String.Format("There is no report associated with the Id {0}.", id));
+                throw new NullResultException(String.Format("There is no report associated with the Id {0}.", id));
             }
             else
             {
@@ -82,7 +83,15 @@ namespace BugCatcher.DAL.Implementation.Repositories
 
         void IReportRepository.Save()
         {
-            dbContext.SaveChanges();
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DbUpdateException("Could not save changes. Please try again later.\n" + ex.Message,
+                    ex.InnerException);
+            }
         }
 
 

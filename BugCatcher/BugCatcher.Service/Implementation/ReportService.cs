@@ -9,6 +9,8 @@ using BugCatcher.Service.Models.Queries.DataConversion;
 using BugCatcher.DAL.Models;
 using BugCatcher.Service.Models.Commands.DataConversion;
 using BugCatcher.DAL.Abstraction.Repositories;
+using BugCatcher.Exception;
+using Microsoft.EntityFrameworkCore;
 
 namespace BugCatcher.Service.Implementation
 {
@@ -29,7 +31,7 @@ namespace BugCatcher.Service.Implementation
                 reportRepository.CreateReport(command.ToReportModel());
                 reportRepository.Save();
             }
-            catch (Exception)
+            catch (DbUpdateException)
             {
                 throw;
             }
@@ -48,9 +50,9 @@ namespace BugCatcher.Service.Implementation
             {
                 rawReport = reportRepository.GetReport(id);
             }
-            catch (Exception) // TO DO: Catch null result exceptions
+            catch (NullResultException) // TO DO: Catch null result exceptions
             {
-
+                throw;
             }
             finally
             {
@@ -61,7 +63,7 @@ namespace BugCatcher.Service.Implementation
                 return queryData;
             else
             {
-                throw new Exception("Unknown service error happened while getting report information.");
+                throw new NullResultException("Unknown service error happened while getting report information.");
             }
         }
 

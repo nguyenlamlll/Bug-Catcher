@@ -39,6 +39,12 @@ namespace BugCatcher.DAL.Implementation.Repositories
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <returns></returns>
+        /// <exception cref="NullResultException">Query result returns null/empty list.</exception>
         List<Product> IProductRepository.GetProduct(ProductFetchingFilter filter)
         {
             var rawProductList = dbContext.Products
@@ -55,14 +61,23 @@ namespace BugCatcher.DAL.Implementation.Repositories
             {
                 queryResult = queryResult.FilterReportsByName(filter.Name).ToList();
             }
-
+            
+            if (queryResult == null) { throw new NullResultException("Could not fetch any product."); }
             if (!queryResult.Any()) { throw new NullResultException("Could not fetch any product."); }
-            else { return queryResult; }
+            return queryResult;
         }
 
         void IDataWritable.Save()
         {
-            throw new NotImplementedException();
+            try
+            {
+                dbContext.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DbUpdateException("Unable to save changes. Please try again later.\n" + ex.ToString(), 
+                    ex.InnerException);
+            }
         }
 
         void IProductRepository.UpdateProduct(Product product)

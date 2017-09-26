@@ -22,7 +22,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
                 ApplicationUser user = dbContext.Users.Find(id);
                 if (user == null)
                 {
-                    throw new Exception(String.Format("There is no user associated with the Id: {0}.", id));
+                    throw new System.Exception(String.Format("There is no user associated with the Id: {0}.", id));
                 }
                 else
                 {

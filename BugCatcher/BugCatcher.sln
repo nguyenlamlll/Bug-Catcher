@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.DAL.Abstraction"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.DAL.Query", "BugCatcher.DAL.Query\BugCatcher.DAL.Query.csproj", "{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugCatcher.Exception", "BugCatcher.Exception\BugCatcher.Exception.csproj", "{9634546B-7886-4072-95EA-912880DC6C38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.Exception", "BugCatcher.Exception\BugCatcher.Exception.csproj", "{9634546B-7886-4072-95EA-912880DC6C38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
