@@ -30,7 +30,7 @@ namespace BugCatcher.DAL.Implementation.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<Build> Buids { get; set; }
+        public DbSet<Build> Builds { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Report> Reports { get; set; }
         public DbSet<Company> Companies { get; set; }

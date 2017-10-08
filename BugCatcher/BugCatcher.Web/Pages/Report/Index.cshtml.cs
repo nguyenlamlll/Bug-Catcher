@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BugCatcher.Service.Models.Queries;
 using BugCatcher.Service.Abstraction;
 using BugCatcher.DAL.Query.Models.Filters;
+using System.Data.SqlClient;
 
 namespace BugCatcher.Web.Pages.Report
 {
@@ -23,7 +24,14 @@ namespace BugCatcher.Web.Pages.Report
         public void OnGet()
         {
             // Get everything from the table.
-            BugReports = reportService.GetReport(new ReportFetchingFilter());
+            try
+            {
+                BugReports = reportService.GetReport(new ReportFetchingFilter());
+            }
+            catch (SqlException)
+            {
+                RedirectToPage("..\\Error");
+            }
         }
     }
 }

@@ -1,55 +1,35 @@
 ﻿using BugCatcher.DAL.Abstraction.Repositories;
+using BugCatcher.Exception;
+using BugCatcher.Service.Abstraction;
+using BugCatcher.Service.Models.Queries;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-using BugCatcher.DAL.Models;
-using BugCatcher.DAL.Query.Models.Filters;
-using BugCatcher.DAL.Implementation.Data;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
-
-namespace BugCatcher.DAL.Implementation.Repositories
+namespace BugCatcher.Service.Implementation
 {
-    public class CompanyRepository : BaseRepository, ICompanyRepository
+    public class UserService : IUserService
     {
-        public CompanyRepository(ApplicationDbContext dbContext) : base(dbContext) { }
-
-        void ICompanyRepository.CreateCompany(Company company)
+        private readonly ICompanyEnrollmentRepository companyEnrollmentRepository;
+        private readonly ICompanyRepository companyRepository;
+        public UserService(ICompanyEnrollmentRepository companyEnrollmentRepository, ICompanyRepository companyRepository)
         {
-            dbContext.Companies.Add(company);
+            this.companyEnrollmentRepository = companyEnrollmentRepository;
+            this.companyRepository = companyRepository;
         }
 
-        void ICompanyRepository.DeleteCompany(Guid id)
+        async Task<List<CompanyQueryData>> IUserService.GetCompanyIdOfUser(Guid userId)
         {
-            throw new NotImplementedException();
-        }
-
-        Company ICompanyRepository.GetCompany(Guid id)
-        {
-            return dbContext.Companies.Find(id);
-        }
-
-        List<Company> ICompanyRepository.GetCompany(CompanyFetchingFilter filter)
-        {
-            throw new NotImplementedException();
-        }
-
-        void ICompanyRepository.Save()
-        {
-            try
+            var companyIds = await Task.Run(() => companyEnrollmentRepository.GetCompanyIdOfUser(userId));
+            List<CompanyQueryData> queryResult = new List<CompanyQueryData>();
+            foreach (var id in companyIds)
             {
-                dbContext.SaveChanges();
+                queryResult.Add(new CompanyQueryData(companyRepository.GetCompany(id)));
             }
-            catch (DbUpdateException ex)
-            {
-                throw new DbUpdateException("There was a problem updating company records.\n" + ex.Message,
-                    ex.InnerException);
-            }
-        }
-
-        void ICompanyRepository.UpdateCompany(Company company)
-        {
-            throw new NotImplementedException();
+            if (!queryResult.Any()) { throw new NullResultException("Service of getting companies failed. Couldn't convert into query objects."); }
+            return queryResult;
         }
 
         #region IDisposable Support
@@ -62,7 +42,8 @@ namespace BugCatcher.DAL.Implementation.Repositories
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects).
-                    dbContext.Dispose();
+                    companyEnrollmentRepository.Dispose();
+                    companyRepository.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
@@ -73,7 +54,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
         }
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~CompanyRepository() {
+        // ~UserService() {
         //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
         //   Dispose(false);
         // }

@@ -13,6 +13,14 @@ namespace BugCatcher.DAL.Query.Models.Filters
             set { name = value; }
         }
 
+        private Guid? companyId = null;
+        public Guid? CompanyId
+        {
+            get { return companyId; }
+            set { companyId = value; }
+        }
+
+
         private string exactName = null;
         public string ExactName
         {

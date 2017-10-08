@@ -56,6 +56,9 @@ namespace BugCatcher.Web
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductRepository, ProductRepository>();
 
+            // Add USER Services
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICompanyEnrollmentRepository, CompanyEnrollmentRepository>();
 
             services.AddMvc()
                 .AddRazorPagesOptions(options =>

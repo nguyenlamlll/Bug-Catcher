@@ -1,55 +1,58 @@
 ﻿using BugCatcher.DAL.Abstraction.Repositories;
+using BugCatcher.DAL.Implementation.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using BugCatcher.DAL.Models;
-using BugCatcher.DAL.Query.Models.Filters;
-using BugCatcher.DAL.Implementation.Data;
 using Microsoft.EntityFrameworkCore;
-
+using BugCatcher.Exception;
 
 namespace BugCatcher.DAL.Implementation.Repositories
 {
-    public class CompanyRepository : BaseRepository, ICompanyRepository
+    public class CompanyEnrollmentRepository : BaseRepository, ICompanyEnrollmentRepository
     {
-        public CompanyRepository(ApplicationDbContext dbContext) : base(dbContext) { }
+        public CompanyEnrollmentRepository(ApplicationDbContext dbContext) : base(dbContext) { }
 
-        void ICompanyRepository.CreateCompany(Company company)
+        void ICompanyEnrollmentRepository.CreateCompanyEnrollment(CompanyEnrollment enrollment)
         {
-            dbContext.Companies.Add(company);
+            var existedRecord = (from enrollments in dbContext.CompanyEnrollments
+                                 where enrollments.UserId == enrollment.UserId && enrollments.CompanyId == enrollment.CompanyId
+                                 select enrollments).SingleOrDefault();
+            if (existedRecord == null)
+                dbContext.CompanyEnrollments.Add(enrollment);
         }
 
-        void ICompanyRepository.DeleteCompany(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        Company ICompanyRepository.GetCompany(Guid id)
-        {
-            return dbContext.Companies.Find(id);
-        }
-
-        List<Company> ICompanyRepository.GetCompany(CompanyFetchingFilter filter)
+        void ICompanyEnrollmentRepository.DeleteCompanyEnrollment(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        void ICompanyRepository.Save()
+        List<Guid> ICompanyEnrollmentRepository.GetCompanyIdOfUser(Guid userId)
+        {
+            var idList = (from enrollments in dbContext.CompanyEnrollments
+                          where enrollments.UserId == userId
+                          select enrollments.CompanyId).ToList();
+            if (idList == null) { throw new NullResultException("Result returned null in company enrollment repository."); }
+            if (!idList.Any()) { throw new NullResultException(String.Format("There is no company associated with the user with Id {0}.", userId)); }
+            return idList;
+        }
+
+        void ICompanyEnrollmentRepository.Save()
         {
             try
             {
                 dbContext.SaveChanges();
             }
-            catch (DbUpdateException ex)
+            catch (DbUpdateException)
             {
-                throw new DbUpdateException("There was a problem updating company records.\n" + ex.Message,
-                    ex.InnerException);
+                throw;
             }
         }
 
-        void ICompanyRepository.UpdateCompany(Company company)
+        void ICompanyEnrollmentRepository.UpdateCompanyEnrollment(CompanyEnrollment enrollment)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(enrollment).State = EntityState.Modified;
         }
 
         #region IDisposable Support
@@ -73,7 +76,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
         }
 
         // TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-        // ~CompanyRepository() {
+        // ~CompanyEnrollmentRepository() {
         //   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
         //   Dispose(false);
         // }
