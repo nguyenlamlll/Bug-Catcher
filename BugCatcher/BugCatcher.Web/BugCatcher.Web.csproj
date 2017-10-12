@@ -23,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Pages\Company\" />
+    <Folder Include="Pages\Company\Manage\" />
     <Folder Include="Pages\Product\" />
     <Folder Include="Pages\Report\" />
     <Folder Include="wwwroot\images\documentation\" />

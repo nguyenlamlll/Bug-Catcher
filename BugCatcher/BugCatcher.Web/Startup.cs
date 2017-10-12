@@ -65,6 +65,12 @@ namespace BugCatcher.Web
                 {
                     options.Conventions.AuthorizeFolder("/Account/Manage");
                     options.Conventions.AuthorizePage("/Account/Logout");
+
+                    options.Conventions.AuthorizeFolder("/Company");
+
+                    options.Conventions.AuthorizeFolder("/Product");
+
+                    options.Conventions.AuthorizeFolder("/Report");
                 });
 
             // Register no-op EmailSender used by account confirmation and password reset during development
@@ -75,6 +81,15 @@ namespace BugCatcher.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
+            app.UseCors(config =>
+            {
+                config.AllowAnyOrigin();
+                config.AllowAnyMethod();
+                config.AllowAnyHeader();
+                config.WithExposedHeaders("Location");
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

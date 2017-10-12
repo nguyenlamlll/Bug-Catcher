@@ -20,9 +20,24 @@ namespace BugCatcher.Service.Implementation
             this.companyRepository = companyRepository;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         async Task<List<CompanyQueryData>> IUserService.GetCompanyIdOfUser(Guid userId)
         {
-            var companyIds = await Task.Run(() => companyEnrollmentRepository.GetCompanyIdOfUser(userId));
+            List<Guid> companyIds = null;
+            try
+            {
+                companyIds = await Task.Run(() => companyEnrollmentRepository.GetCompanyIdOfUser(userId));
+            }
+            catch (NullResultException innerNullException)
+            {
+                throw innerNullException;
+                //throw new ArgumentNullException("Coudln't get company IDs.", innerNullException);
+            }
             List<CompanyQueryData> queryResult = new List<CompanyQueryData>();
             foreach (var id in companyIds)
             {

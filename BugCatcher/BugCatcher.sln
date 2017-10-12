@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.8
+VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.Web", "BugCatcher.Web\BugCatcher.Web.csproj", "{28F5FF3F-CAEF-4BFB-8E75-91DACC5073EA}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.DAL.Query", "BugCatcher.DAL.Query\BugCatcher.DAL.Query.csproj", "{E920B6CC-440E-4CEE-A2F2-DDA40E017C0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BugCatcher.Exception", "BugCatcher.Exception\BugCatcher.Exception.csproj", "{9634546B-7886-4072-95EA-912880DC6C38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BugCatcher.REST", "BugCatcher.REST\BugCatcher.REST.csproj", "{233E7C70-D6F3-49DA-94C0-E664BF4C2756}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{9634546B-7886-4072-95EA-912880DC6C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9634546B-7886-4072-95EA-912880DC6C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9634546B-7886-4072-95EA-912880DC6C38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{233E7C70-D6F3-49DA-94C0-E664BF4C2756}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233E7C70-D6F3-49DA-94C0-E664BF4C2756}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233E7C70-D6F3-49DA-94C0-E664BF4C2756}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233E7C70-D6F3-49DA-94C0-E664BF4C2756}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

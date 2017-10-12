@@ -63,7 +63,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
             }
             
             if (queryResult == null) { throw new NullResultException("Could not fetch any product."); }
-            if (!queryResult.Any()) { throw new NullResultException("Could not fetch any product."); }
+            //if (!queryResult.Any()) { throw new NullResultException("Could not fetch any product."); }
             return queryResult;
         }
 
