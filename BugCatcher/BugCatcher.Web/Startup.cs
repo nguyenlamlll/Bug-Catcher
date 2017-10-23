@@ -56,6 +56,10 @@ namespace BugCatcher.Web
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IProductRepository, ProductRepository>();
 
+            // Add BUILD Services
+            services.AddTransient<IBuildService, BuildService>();
+            services.AddTransient<IBuildRepository, BuildRepository>();
+
             // Add USER Services
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICompanyEnrollmentRepository, CompanyEnrollmentRepository>();
@@ -111,6 +115,12 @@ namespace BugCatcher.Web
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+            }
+
         }
     }
 }
