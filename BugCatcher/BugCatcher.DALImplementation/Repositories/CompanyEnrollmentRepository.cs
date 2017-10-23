@@ -34,7 +34,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
                           where enrollments.UserId == userId
                           select enrollments.CompanyId).ToList();
             if (idList == null) { throw new NullResultException("Result returned null in company enrollment repository."); }
-            if (!idList.Any()) { throw new NullResultException(String.Format("There is no company associated with the user with Id {0}.", userId)); }
+            //if (!idList.Any()) { throw new NullResultException(String.Format("There is no company associated with the user with Id {0}.", userId)); }
             return idList;
         }
 

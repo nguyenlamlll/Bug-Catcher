@@ -92,6 +92,12 @@ namespace BugCatcher.DAL.Implementation.Repositories
                 throw new DbUpdateException("Could not save changes. Please try again later.\n" + ex.Message,
                     ex.InnerException);
             }
+#if DEBUG
+            catch (System.Exception ex)
+            {
+                throw new System.Exception(ex.Message);
+            }
+#endif
         }
 
 
