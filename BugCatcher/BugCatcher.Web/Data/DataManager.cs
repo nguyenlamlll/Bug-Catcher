@@ -1,4 +1,6 @@
 ﻿using BugCatcher.DAL.Implementation.Data;
+using BugCatcher.DAL.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,16 +8,22 @@ using System.Threading.Tasks;
 
 namespace BugCatcher.Web.Data
 {
-    public class DataManager
+    public class DataManager : IDataManager
     {
-        public void SeedData(ApplicationDbContext dbContext)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public DataManager(UserManager<ApplicationUser> _userManager)
         {
-            SeedUsers(dbContext);
+            this._userManager = _userManager;
+        }
 
-            SeedCompanies(dbContext);
+        public async Task SeedData(ApplicationDbContext dbContext)
+        {
+            //await SeedUsers(dbContext);
 
-            int i = 0;
-            SeedProductsOfCompany(dbContext, i);
+            //SeedCompanies(dbContext);
+
+            //int i = 0;
+            //SeedProductsOfCompany(dbContext, i);
         }
 
         private void SeedProductsOfCompany(ApplicationDbContext dbContext, int i)
@@ -31,10 +39,11 @@ namespace BugCatcher.Web.Data
                 // Seed companies created by first user.
             }
         }
-
-        private void SeedUsers(ApplicationDbContext dbContext)
+        
+        async Task IDataManager.SeedUsers(ApplicationDbContext dbContext)
         {
-            //dbContext.Users.Add()
+            var user = new ApplicationUser { UserName = "Random User", Email = "random-user@email.com" };
+            var result = await _userManager.CreateAsync(user, "123456789");
         }
     }
 }

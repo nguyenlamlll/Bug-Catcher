@@ -19,10 +19,6 @@ namespace BugCatcher.Web.Pages.Company
             this.productService = productService;
         }
 
-        public void OnGet()
-        {
-        }
-
         public async Task<IActionResult> OnGetAsync(Guid? id)
         {
             if (id == null)
