@@ -10,6 +10,7 @@ namespace BugCatcher.Service.Models.Queries
         public ProductQueryData() { }
         public ProductQueryData(Product product)
         {
+            Id = product.Id;
             Name = product.Name;
             Description = product.Description;
 
@@ -25,6 +26,8 @@ namespace BugCatcher.Service.Models.Queries
                 }
             }
         }
+
+        public Guid Id { get; private set; }
 
         public string Name { get; private set; }
 

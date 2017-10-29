@@ -8,32 +8,30 @@ using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Models.Queries;
 using BugCatcher.DAL.Query.Models.Filters;
 
-namespace BugCatcher.Web.Pages.Company
+namespace BugCatcher.Web.Pages.Build
 {
+    /// <summary>
+    /// Details of a build.
+    /// </summary>
     public class DetailsModel : PageModel
     {
-        private IProductService productService;
-        public IList<ProductQueryData> Products { get; set; }
+        public IList<ReportQueryData> Reports { get; set; }
 
-        public DetailsModel(IProductService productService)
+        private readonly IReportService reportService;
+        public DetailsModel()
         {
-            this.productService = productService;
         }
-
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public IActionResult OnGet(Guid? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            // TO DO: Load products of this company.
-            Products = productService.GetProduct(new ProductFetchingFilter()
+            reportService.GetReport(new ReportFetchingFilter()
             {
-                CompanyId = id
+                RequiredBuildId = id
             });
-
-            // TO DO: Load news of this company.
 
             return Page();
         }

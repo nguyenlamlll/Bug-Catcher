@@ -1,5 +1,6 @@
 ﻿using BugCatcher.DAL.Abstraction.Repositories;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using BugCatcher.DAL.Models;
@@ -33,9 +34,13 @@ namespace BugCatcher.DAL.Implementation.Repositories
         List<Build> IBuildRepository.GetBuild(BuildFetchingFilter filter)
         {
             List<Build> builds = new List<Build>();
+            var buildList = dbContext.Builds.Include(bld => bld.Reports);
+            builds = (from records in buildList
+                      select records).ToList();
+
             if (filter.ProductId.HasValue)
             {
-
+                builds = builds.FilterBuildsByProductID(filter.ProductId.Value).ToList();
             }
             return builds;
         }

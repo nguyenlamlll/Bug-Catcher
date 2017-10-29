@@ -1,0 +1,114 @@
+﻿section {
+    position: relative;
+    padding: 96px 0;
+    z-index: 0;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff
+}
+
+    section.bg-alt {
+        background-color: #fafafa
+    }
+
+    section.bg-img {
+        border-bottom: none;
+        color: #fff
+    }
+
+        section.bg-img::before {
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-color: rgba(0, 0, 0, 0.65)
+        }
+
+        section.bg-img h2,
+        section.bg-img h3 {
+            color: #fff
+        }
+
+    section.bg-repeat {
+        background-repeat: repeat;
+        background-size: auto
+    }
+
+    section .bg-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        transform: translate(-50% -50%);
+        overflow: hidden
+    }
+
+.section-header {
+    text-align: center;
+    margin-bottom: 72px
+}
+
+    .section-header span {
+        color: #c8d0d7;
+        font-family: Montserrat, sans-serif;
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase
+    }
+
+    .section-header h2,
+    .section-header h3 {
+        position: relative;
+        margin-bottom: 48px;
+        color: #55595c;
+        text-transform: capitalize
+    }
+
+        .section-header h2::after,
+        .section-header h3::after {
+            position: absolute;
+            left: 50%;
+            margin-left: -24px;
+            bottom: -26px;
+            width: 48px;
+            height: 2px;
+            background-color: #29aafe;
+            content: ""
+        }
+
+    .section-header span ~ h2,
+    .section-header span ~ h3 {
+        margin-top: 12px
+    }
+
+    .section-header p {
+        font-size: 18px
+    }
+
+    .section-header.text-left {
+        text-align: left
+    }
+
+        .section-header.text-left h2::after,
+        .section-header.text-left h3::after {
+            left: 0;
+            margin-left: 0
+        }
+
+    .section-header.text-right {
+        text-align: right
+    }
+
+        .section-header.text-right h2::after,
+        .section-header.text-right h3::after {
+            left: 100%;
+            margin-left: -48px
+        }
