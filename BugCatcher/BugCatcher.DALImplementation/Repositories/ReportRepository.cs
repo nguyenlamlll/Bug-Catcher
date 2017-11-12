@@ -22,6 +22,9 @@ namespace BugCatcher.DAL.Implementation.Repositories
 
         void IReportRepository.CreateReport(Report report)
         {
+            report.IsActive = true;
+            report.DateOfCreated = DateTime.UtcNow;
+
             dbContext.Reports.Add(report);
         }
 

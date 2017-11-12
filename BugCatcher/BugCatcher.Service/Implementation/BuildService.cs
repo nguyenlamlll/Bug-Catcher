@@ -30,6 +30,11 @@ namespace BugCatcher.Service.Implementation
             throw new NotImplementedException();
         }
 
+        BuildQueryData IBuildService.GetBuild(Guid id)
+        {
+            return new BuildQueryData(buildRepository.GetBuild(id));
+        }
+
         List<BuildQueryData> IBuildService.GetBuild(BuildFetchingFilter filter)
         {
             var queryResult = new List<BuildQueryData>();

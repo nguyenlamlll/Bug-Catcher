@@ -15,7 +15,11 @@ namespace BugCatcher.Service.Models.Commands
         [Display(Name = "Title")]
         public string Title { get; set; }
 
+        [Required]
         public Guid ReporterId { get; set; }
+
+        [Required]
+        public Guid BuildId { get; set; }
 
         [Required]
         [DataType(DataType.MultilineText)]

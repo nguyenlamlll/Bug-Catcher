@@ -27,7 +27,8 @@ namespace BugCatcher.Service.Models.Commands.DataConversion
                 Title = command.Title,
                 ReporterId = command.ReporterId,
                 Description = command.Description,
-                ReproduceSteps = command.ReproduceSteps
+                ReproduceSteps = command.ReproduceSteps,
+                BuildId = command.BuildId
             };
         }
     }

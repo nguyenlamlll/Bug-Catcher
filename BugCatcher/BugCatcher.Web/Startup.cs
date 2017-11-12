@@ -19,6 +19,8 @@ using BugCatcher.DAL.Abstraction.Repositories;
 using BugCatcher.DAL.Implementation.Repositories;
 using BugCatcher.Web.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Routing;
+using BugCatcher.Web.Middlewares;
 
 namespace BugCatcher.Web
 {
@@ -41,6 +43,8 @@ namespace BugCatcher.Web
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
@@ -96,6 +100,9 @@ namespace BugCatcher.Web
                 config.AllowAnyHeader();
                 config.WithExposedHeaders("Location");
             });
+
+            // Setup routes
+            app.UseGetRoutesMiddleware(GetRoutes);
 
             if (env.IsDevelopment())
             {
@@ -280,5 +287,13 @@ namespace BugCatcher.Web
             } // End Seeding
 
         }
+
+        private readonly Action<IRouteBuilder> GetRoutes = 
+            routes =>
+            {   
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            };
     }
 }

@@ -18,6 +18,8 @@ namespace BugCatcher.Service.Abstraction
         /// <returns></returns>
         List<BuildQueryData> GetBuild();
 
+        BuildQueryData GetBuild(Guid id);
+
         /// <summary>
         /// Gets all build using a filter.
         /// </summary>
