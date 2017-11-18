@@ -3,11 +3,11 @@ using BugCatcher.Service.Models.Queries;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using BugCatcher.DALImplementation.Data.Filters;
+using BugCatcher.DAL.Query.Models.Filters;
 
 namespace BugCatcher.Service.Abstraction
 {
-    public interface IReportService
+    public interface IReportService : IDisposable
     {
         void CreateReport(CreateReportCommand command);
 
@@ -16,13 +16,13 @@ namespace BugCatcher.Service.Abstraction
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        ReportQueryInfo GetReport(Guid id);
+        ReportQueryData GetReport(Guid id);
 
         /// <summary>
         /// Gets report based on a given set of criterias.
         /// </summary>
         /// <param name="filter"></param>
         /// <returns></returns>
-        List<ReportQueryInfo> GetReport (ReportFetchingFilter filter);
+        List<ReportQueryData> GetReport (ReportFetchingFilter filter);
     }
 }

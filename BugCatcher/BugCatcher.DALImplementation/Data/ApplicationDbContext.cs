@@ -8,7 +8,7 @@ using BugCatcher.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 using BugCatcher.DAL.Models.Identity;
 
-namespace BugCatcher.DALImplementation.Data
+namespace BugCatcher.DAL.Implementation.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid
         //, 
@@ -30,8 +30,10 @@ namespace BugCatcher.DALImplementation.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<Build> Buids { get; set; }
+        public DbSet<Build> Builds { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Report> Reports { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyEnrollment> CompanyEnrollments { get; set; }
     }
 }

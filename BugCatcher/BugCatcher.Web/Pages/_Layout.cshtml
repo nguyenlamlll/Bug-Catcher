@@ -8,6 +8,10 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/container.css" />
+        <link rel="stylesheet" href="~/css/section.css" />
+        <link rel="stylesheet" href="~/css/navigation-menu.css" />
+        <link rel="stylesheet" href="~/css/app.min.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -15,7 +19,10 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    @RenderSection("Styles", required: false)
 </head>
+
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
@@ -38,13 +45,96 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div>
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2017 - BugCatcher.Web</p>
+
+        <footer class="site-footer">
+            <!--Top section-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <h6>About</h6>
+                        <p class="text-justify">
+                            Bug Catcher is a cloud platform where you can efficiently 
+                                handle reports of your projects.
+                            With visual charts, version-by-version trackers, on-site discussions,
+                                defect handling is a nightmare no more.
+                            No matter who you are and what role you have in your team,
+                                developer, tester, or manager, Bug Catcher always knows a way
+                                to levitate the heavy works of yours.
+                        </p>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Company</h6>
+                        <ul class="footer-links">
+                            <li><a href="about">About us</a></li>
+                            <li><a href="page-typography.html">How it works</a></li>
+                            <li><a href="page-faq.html">Help center</a></li>
+                            <li><a href="page-typography.html">Privacy policy</a></li>
+                            <li><a href="page-contact.html">Contact us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <h6>Career</h6>
+                        <ul class="footer-links">
+                            <li><a href="job-list.html">Current opportunities</a></li>
+                            <li><a href="job-list.html">Your colleagues</a></li>
+                            <li><a href="job-list.html">Benefits</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr>
+            </div>
+            <!--END Top section-->
+
+            <!--Bottom section-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-6 col-xs-12">
+                        <p>&copy; 2017 All Rights Reserved by NguyenLam.</p>
+                    </div>
+
+                    <!--Social site links-->
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <ul class="social-icons">
+                            <li>
+                                <a class="facebook" href="#">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="twitter" href="#">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dribbble" href="#">
+                                    <i class="fa fa-dribbble"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="linkedin" href="#">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="instagram" href="#">
+                                    <i class="fa fa-instagram"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+            </div>
+            <!--END Bottom section-->
         </footer>
     </div>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -53,7 +143,7 @@
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"`
                 asp-fallback-test="window.jQuery"
                 crossorigin="anonymous"
                 integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
@@ -66,7 +156,6 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("Scripts", required: false)
 </body>
 </html>

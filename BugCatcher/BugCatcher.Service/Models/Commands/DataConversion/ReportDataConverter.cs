@@ -13,6 +13,7 @@ namespace BugCatcher.Service.Models.Commands.DataConversion
             return new CreateReportCommand()
             {
                 Title = report.Title,
+                ReporterId = report.ReporterId,
                 Description = report.Description,
                 ReproduceSteps = report.ReproduceSteps
             };
@@ -24,8 +25,10 @@ namespace BugCatcher.Service.Models.Commands.DataConversion
             return new Report()
             {
                 Title = command.Title,
+                ReporterId = command.ReporterId,
                 Description = command.Description,
-                ReproduceSteps = command.ReproduceSteps
+                ReproduceSteps = command.ReproduceSteps,
+                BuildId = command.BuildId
             };
         }
     }

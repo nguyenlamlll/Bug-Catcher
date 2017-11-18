@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BugCatcher.DAL.Query\BugCatcher.DAL.Query.csproj" />
+    <ProjectReference Include="..\BugCatcher.DAL\BugCatcher.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

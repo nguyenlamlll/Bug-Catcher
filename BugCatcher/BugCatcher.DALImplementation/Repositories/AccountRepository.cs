@@ -1,11 +1,12 @@
-﻿using BugCatcher.DALImplementation.RepositoryAbstraction;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BugCatcher.DAL.Models;
-using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Implementation.Data;
+using BugCatcher.DAL.Implementation.Repositories;
+using BugCatcher.DAL.Abstraction.Repositories;
 
-namespace BugCatcher.DALImplementation.Repositories
+namespace BugCatcher.DAL.Implementation.Repositories
 {
     public class AccountRepository : BaseRepository, IAccountRepository
     {
@@ -21,7 +22,7 @@ namespace BugCatcher.DALImplementation.Repositories
                 ApplicationUser user = dbContext.Users.Find(id);
                 if (user == null)
                 {
-                    throw new Exception(String.Format("There is no user associated with the Id: {0}.", id));
+                    throw new System.Exception(String.Format("There is no user associated with the Id: {0}.", id));
                 }
                 else
                 {

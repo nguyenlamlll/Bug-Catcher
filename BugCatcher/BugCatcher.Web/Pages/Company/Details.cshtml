@@ -1,0 +1,17 @@
+﻿@page
+@model DetailsModel
+@{
+    ViewData["Title"] = "Company Details";
+}
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="~/css/section.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/container.css" />
+}
+
+@foreach (var product in Model.Products)
+{
+    <div class="container">
+        <a asp-page="../Product/Details" asp-route-id="@product.Id">@product.Name</a>
+        <p>@product.Description</p>
+    </div>
+}

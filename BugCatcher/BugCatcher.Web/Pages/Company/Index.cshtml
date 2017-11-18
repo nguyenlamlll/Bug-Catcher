@@ -1,0 +1,25 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Company Frontpage";
+}
+
+<h2>Company: </h2>
+@if (Model.Companies != null)
+{
+    foreach (var item in Model.Companies)
+    {
+        <div>
+            <h4>@item.Name</h4>
+            <p>Products: @Model.Products.Count()</p>
+            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+        </div>
+
+    }
+}
+else
+{
+    <div><h4>It looks a bit empty here. Contact your service provider to have you asigned to a specific company.</h4></div>
+}

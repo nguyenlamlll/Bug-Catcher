@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BugCatcher.DALImplementation\BugCatcher.DALImplementation.csproj" />
+    <ProjectReference Include="..\BugCatcher.DALImplementation\BugCatcher.DAL.Implementation.csproj" />
     <ProjectReference Include="..\BugCatcher.DAL\BugCatcher.DAL.csproj" />
   </ItemGroup>
 

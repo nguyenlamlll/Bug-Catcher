@@ -1,21 +1,32 @@
-﻿using BugCatcher.DALImplementation.RepositoryAbstraction;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using BugCatcher.DAL.Models;
-using BugCatcher.DALImplementation.Data.Filters;
-using BugCatcher.DALImplementation.Data;
+using BugCatcher.DAL.Implementation.Data;
 using System.Linq;
 using Microsoft.EntityFrameworkCore; //To load related data.
+using BugCatcher.DAL.Implementation.Repositories.ExtensionMethods;
+using BugCatcher.DAL.Abstraction.Repositories;
+using BugCatcher.DAL.Query.Models.Filters;
+using BugCatcher.Exception;
 
-namespace BugCatcher.DALImplementation.Repositories
+namespace BugCatcher.DAL.Implementation.Repositories
 {
-    public class ReportRepository : BaseRepository, IReportRepository
+    public class ReportRepository : IReportRepository//, IDisposable
     {
-
+        private ApplicationDbContext dbContext;
         public ReportRepository(ApplicationDbContext dbContext)
-            : base(dbContext)
-        { }
+        {
+            this.dbContext = dbContext;
+        }
+
+        void IReportRepository.CreateReport(Report report)
+        {
+            report.IsActive = true;
+            report.DateOfCreated = DateTime.UtcNow;
+
+            dbContext.Reports.Add(report);
+        }
 
         /// <summary>
         /// Gets a report by its exact Id number.
@@ -24,21 +35,18 @@ namespace BugCatcher.DALImplementation.Repositories
         /// <returns></returns>
         Report IReportRepository.GetReport(Guid id)
         {
-            using (dbContext)
-            {
-                var report = dbContext.Reports
-                    .Include(r => r.Reporter)
-                    .Where(r => r.Id == id)
-                    .SingleOrDefault();
+            var report = dbContext.Reports
+                .Include(r => r.Reporter)
+                .Where(r => r.Id == id)
+                .SingleOrDefault();
 
-                if (report == null)
-                {
-                    throw new Exception(String.Format("There is no report associated with the Id {0}.", id));
-                }
-                else
-                {
-                    return report;
-                }
+            if (report == null)
+            {
+                throw new NullResultException(String.Format("There is no report associated with the Id {0}.", id));
+            }
+            else
+            {
+                return report;
             }
         }
 
@@ -51,21 +59,68 @@ namespace BugCatcher.DALImplementation.Repositories
         ///     initialize the object as it has the default constraints itself.
         /// </param>
         /// <returns></returns>
-        IList<Report> IReportRepository.GetReport(ReportFetchingFilter filter)
+        List<Report> IReportRepository.GetReport(ReportFetchingFilter filter)
         {
-            using (dbContext)
+            List<Report> resultList = dbContext.Reports //.Include(report => report.Build)
+                .ToList();
+
+            // Apply filters
+            if (filter.RequiredBuildId.HasValue)
+                resultList = resultList.FilterReportsByBuildId(filter.RequiredBuildId.Value).ToList();
+
+            return resultList;
+        }
+
+        void IReportRepository.DeleteReport(Guid id)
+        {
+            Report report = dbContext.Reports.Find(id);
+            report.IsActive = false;
+        }
+
+        void IReportRepository.UpdateReport(Report report)
+        {
+            dbContext.Entry(report).State = EntityState.Modified;
+        }
+
+
+
+        void IReportRepository.Save()
+        {
+            try
             {
-                IList<Report> resultList = (from records in dbContext.Reports
-                                            select records).ToList();
-
-                // Apply filters
-                if (filter.RequiredBuildId != null && filter.RequiredBuildId != Guid.Empty)
-                    resultList = (from items in resultList
-                                  where items.BuildId == filter.RequiredBuildId
-                                  select items).ToList();
-
-                return resultList;
+                dbContext.SaveChanges();
             }
+            catch (DbUpdateException ex)
+            {
+                throw new DbUpdateException("Could not save changes. Please try again later.\n" + ex.Message,
+                    ex.InnerException);
+            }
+#if DEBUG
+            catch (System.Exception ex)
+            {
+                throw new System.Exception(ex.Message);
+            }
+#endif
+        }
+
+
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    dbContext.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        void IDisposable.Dispose()
+        {
+            Dispose(true);
+            //GC.SuppressFinalize(this);
         }
     }
 }
