@@ -1,0 +1,86 @@
+﻿.pricing {
+    list-style: none;
+    padding-left: 0
+}
+
+    .pricing li {
+        background-color: #fff;
+        padding: 30px 20px;
+        float: left;
+        width: 31%;
+        margin-right: 3.5%;
+        text-align: center;
+        border: 1px solid #eee;
+        transition: .3s ease-in-out
+    }
+
+        .pricing li:hover {
+            box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1)
+        }
+
+        .pricing li:nth-child(3n+3) {
+            margin-right: 0
+        }
+
+        .pricing li h6 {
+            font-family: "Open Sans", sans-serif;
+            text-transform: uppercase;
+            color: #96a2b2;
+            font-weight: bold;
+            font-size: 14px
+        }
+
+        .pricing li .price {
+            font-family: Oswald, sans-serif;
+            font-weight: bold;
+            font-size: 75px;
+            line-height: 75px;
+            color: #000;
+            padding: 10px 0
+        }
+
+            .pricing li .price span {
+                display: block;
+                font-family: Montserrat, sans-serif;
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 25px;
+                color: #96a2b2
+            }
+
+            .pricing li .price sup {
+                font-size: 28px;
+                vertical-align: super
+            }
+
+        .pricing li hr {
+            margin-top: 20px;
+            margin-bottom: 30px
+        }
+
+        .pricing li strong {
+            color: #55595c
+        }
+
+    .pricing.cols-4 li {
+        width: 23.5%;
+        margin-right: 2%
+    }
+
+        .pricing.cols-4 li:nth-child(4n+4) {
+            margin-right: 0
+        }
+
+@media (max-width: 991px) {
+    .pricing {
+        margin: 0 auto;
+        max-width: 400px
+    }
+
+        .pricing li {
+            display: block;
+            width: 100% !important;
+            margin-right: 0 !important;
+            margin-bottom: 30px
+        }
+}

@@ -358,12 +358,10 @@ dl {
         margin-bottom: 4%;
         margin-right: 0
     }
-
         .category-grid a:nth-child(odd) {
             margin-right: 4%
         }
 }
-
 @media (max-width: 480px) {
     .category-grid a {
         width: 100%;
@@ -384,17 +382,14 @@ dl {
     font-size: 20px;
     line-height: 1.4;
 }
-
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
-
 /* QR code generator */
 #qrCode {
     margin: 15px;
 }
-
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */
