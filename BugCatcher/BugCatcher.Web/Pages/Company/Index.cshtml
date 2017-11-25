@@ -4,22 +4,45 @@
     ViewData["Title"] = "Company Frontpage";
 }
 
-<h2>Company: </h2>
-@if (Model.Companies != null)
-{
-    foreach (var item in Model.Companies)
-    {
-        <div>
-            <h4>@item.Name</h4>
-            <p>Products: @Model.Products.Count()</p>
-            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-            <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-        </div>
+<div class="container">
+    <section>
+        <!--Section Header-->
+        <header class="section-header">
+            <h2>My Companies</h2>
 
-    }
-}
-else
-{
-    <div><h4>It looks a bit empty here. Contact your service provider to have you asigned to a specific company.</h4></div>
-}
+            <div class="btn-group btn-group-lg">
+                <button class="btn btn-primary">New</button>
+
+                <button class="btn btn-primary">Settings</button>
+
+            </div>
+        </header>
+        <!--END Section Header-->
+
+        @if (Model.Companies != null)
+        {
+            foreach (var item in Model.Companies)
+            {
+                <div class="container">
+                    <h4>@item.Name</h4>
+                    <p>Products: @Model.Products.Count()</p>
+                    <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">
+                        Edit
+                    </a> | 
+                    <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.Id">
+                        Details
+                    </a> |
+                    <a class="btn btn-danger" asp-page="./Delete" asp-route-id="@item.Id">
+                        Delete
+                    </a>
+                </div>
+
+            }
+        }
+        else
+        {
+            <div><h4>It looks a bit empty here. Contact your service provider to have you asigned to a specific company.</h4></div>
+        }
+    </section>
+
+</div>

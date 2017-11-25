@@ -1,6 +1,7 @@
 ﻿using BugCatcher.DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace BugCatcher.Service.Models.Queries
@@ -18,6 +19,8 @@ namespace BugCatcher.Service.Models.Queries
             ProductId = build.ProductId;
         }
         public Guid Id { get; set; }
+
+        [DisplayName("Version")]
         public string Name { get; set; }
 
         public Guid ProductId { get; set; }
