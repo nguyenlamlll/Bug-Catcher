@@ -10,12 +10,23 @@
         <header class="section-header">
             <h2>My Companies</h2>
 
+
             <div class="btn-group btn-group-lg">
-                <button class="btn btn-primary">New</button>
+                <div class="btn-group btn-group-lg">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        New 
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a asp-page="/Company/Create">Company</a></li>
+                        <li><a asp-page="/Company/Report">Report</a></li>
+                    </ul>
+                </div>
 
-                <button class="btn btn-primary">Settings</button>
-
+                <button type="button" class="btn btn-primary">Settings</button>
             </div>
+
+
         </header>
         <!--END Section Header-->
 
@@ -28,7 +39,7 @@
                     <p>Products: @Model.Products.Count()</p>
                     <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">
                         Edit
-                    </a> | 
+                    </a> |
                     <a class="btn btn-primary" asp-page="./Details" asp-route-id="@item.Id">
                         Details
                     </a> |

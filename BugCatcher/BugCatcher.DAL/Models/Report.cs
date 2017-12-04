@@ -30,6 +30,8 @@ namespace BugCatcher.DAL.Models
         public Guid ReporterId { get; set; }
         public ApplicationUser Reporter { get; set; }
 
+        public ICollection<Comment> Comments { get; set; }
+
         #endregion
     }
 }

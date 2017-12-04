@@ -11,9 +11,10 @@ using System;
 namespace BugCatcher.DAL.Implementation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171201120535_AddCommentTable")]
+    partial class AddCommentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,13 +99,9 @@ namespace BugCatcher.DAL.Implementation.Migrations
 
                     b.Property<DateTime>("DateOfCreated");
 
-                    b.Property<Guid>("ReportId");
-
                     b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ReportId");
 
                     b.HasIndex("UserId");
 
@@ -305,11 +302,6 @@ namespace BugCatcher.DAL.Implementation.Migrations
 
             modelBuilder.Entity("BugCatcher.DAL.Models.Comment", b =>
                 {
-                    b.HasOne("BugCatcher.DAL.Models.Report", "Report")
-                        .WithMany("Comments")
-                        .HasForeignKey("ReportId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("BugCatcher.DAL.Models.ApplicationUser", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")

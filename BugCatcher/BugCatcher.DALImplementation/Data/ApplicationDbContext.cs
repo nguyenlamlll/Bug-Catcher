@@ -28,6 +28,11 @@ namespace BugCatcher.DAL.Implementation.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<Comment>()
+                .HasOne(c => c.Report)
+                .WithMany(r => r.Comments)
+                .OnDelete(DeleteBehavior.Restrict);
         }
 
         public DbSet<Build> Builds { get; set; }
@@ -35,5 +40,6 @@ namespace BugCatcher.DAL.Implementation.Data
         public DbSet<Report> Reports { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyEnrollment> CompanyEnrollments { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }

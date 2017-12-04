@@ -15,5 +15,11 @@ namespace BugCatcher.DAL.Models
         /// </summary>
         public Guid UserId { get; set; }
         public ApplicationUser User { get; set; }
+
+        /// <summary>
+        /// Gets or sets Report's ID of this comment.
+        /// </summary>
+        public Guid ReportId { get; set; }
+        public Report Report { get; set; }
     }
 }

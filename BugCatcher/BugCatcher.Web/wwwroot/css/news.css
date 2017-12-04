@@ -1,0 +1,27 @@
+﻿.news {
+    margin-top: 1.25rem;
+}
+
+.news-title {
+    font-weight: 700;
+}
+
+.news-date {
+    color: #acaaaf;
+    font-weight: 500;
+}
+
+.more-news {
+    margin-top: 2.5rem;
+    display: inline-block;
+}
+
+a.news-link {
+    text-decoration: none;
+    color: #468cbf;
+    font-weight: 400;
+    transition: .15s;
+}
+    a.news-link:hover {
+        color: #225f9a;
+    }

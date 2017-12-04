@@ -8,7 +8,7 @@ namespace BugCatcher.Service.Models.Queries
     /// <summary>
     /// A class used to initialize objects that store results yielded from query operation.
     /// </summary>
-    public class ReportQueryData
+    public partial class ReportQueryData
     {
         #region Constructors
         public ReportQueryData() { }
@@ -33,23 +33,5 @@ namespace BugCatcher.Service.Models.Queries
         public DateTime DateOfCreated { get; set; }
 
         public UserData Reporter { get; set; }
-
-
-        public class UserData
-        {
-            #region Constructors
-            public UserData() { }
-            public UserData(ApplicationUser user)
-            {
-                Id = user.Id;
-                UserName = user.UserName;
-                Email = user.Email;
-            }
-            #endregion
-            public Guid Id { get; set; }
-            public string UserName { get; set; }
-            public string Email { get; set; }
-
-        }
     }
 }
