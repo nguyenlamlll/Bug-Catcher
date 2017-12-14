@@ -5,8 +5,14 @@
 }
 
 <h4>@ViewData["Title"]</h4>
-@Html.Partial("_StatusMessage", Model.StatusMessage)
-<div class="row">
+
+<!--Status Message for user's actions-->
+<div id="statusMessageDiv" class="container">
+    @Html.Partial("_StatusMessage", Model.StatusMessage)
+</div>
+<!--END Status Message-->
+
+<div class="container">
     <div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
