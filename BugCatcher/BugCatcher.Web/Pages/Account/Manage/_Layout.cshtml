@@ -2,7 +2,7 @@
     Layout = null;
 }
 <!DOCTYPE html>
-<html>
+<html class="perfect-scrollbar-on">
 
 <head>
     <meta charset="utf-8" />
@@ -30,12 +30,12 @@
             @await Html.PartialAsync("_ManageNav")
         </div>
         <!--END Side Bar-->
+
         <!--Main Panel-->
         <div class="main-panel ps-container ps-theme-default">
             <!--Navigation Bar-->
             <nav class="navbar navbar-transparent navbar-absolute">
                 <div class="container-fluid">
-
                     <!--Navigation Bar Header-->
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse">
@@ -138,15 +138,18 @@
                             </li>
                         </ul>
                     </nav>
-                    <p class="copyright pull-right">
+                    @*<p class="copyright pull-right">
                         ©
                         <script>
                             document.write(new Date().getFullYear())
                         </script>2017
                         <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                    </p>
+                    </p>*@
                 </div>
             </footer>
+
+            <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div>
+            <div class="ps-scrollbar-y-rail" style="top: 0px; height: 759px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 169px; height: 589px;"></div></div>
         </div>
         <!--END Main Panel-->
     </div>

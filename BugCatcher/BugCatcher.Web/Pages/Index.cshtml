@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="~/css/container.css" />
     <link rel="stylesheet" type="text/css" href="~/css/price.css" />
     <link rel="stylesheet" type="text/css" href="~/css/news.css" />
+
 }
 
 <!--Landing section-->
@@ -64,7 +65,7 @@
 
 </div>
 
-<section class="bg-alt" style="background-image: url(images/background2.jpg);">
+<section class="bg-alt" style="background-image: url(images/cover.jpg);">
     <div class="container">
         <header class="section-header">
             <span>Learning</span>
@@ -120,15 +121,18 @@
     </div>
 </section>
 <!--END Pricing section-->
+
 <!--Subscribe section-->
 <section class="bg-img text-center" style="background-image: url(images/background.jpg);">
     <div class="container">
         <h2><strong>Subscribe</strong></h2><h6 class="font-alt">Get new offers delivered to your inbox</h6><br><br><form class="form-subscribe" action="#">
             <div class="input-group">
-                <input class="form-control input-lg" placeholder="Your email address"> <span class="input-group-btn">
-                    <button class="btn btn-success btn-lg" type="submit">
+                <input class="form-control input-lg" placeholder="Your email address">
+                <span class="input-group-btn">
+                    <button id="subscribeButton" class="btn btn-success btn-lg" type="submit" >
                         Subscribe
                     </button>
+
                 </span>
             </div>
         </form>
@@ -152,4 +156,15 @@
         });
     </script>
 
+
+    <script type="text/javascript" src="~/lib/sweetalert2/dist/sweetalert2.all.js"></script>
+    <script>
+        $("#subscribeButton").on('click', function () {
+            swal(
+                'Subscribed!',
+                'Thank you for your interests. Latest news are on their ways.',
+                'success'
+            );
+        });
+    </script>
 }

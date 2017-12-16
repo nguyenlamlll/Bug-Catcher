@@ -2,9 +2,8 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
+    ViewData["ManageBoardTitle"] = "User Profile";
 }
-
-<h4>@ViewData["Title"]</h4>
 
 <!--Status Message for user's actions-->
 <div id="statusMessageDiv" class="container">
@@ -12,8 +11,7 @@
 </div>
 <!--END Status Message-->
 
-<div class="container">
-    <div class="col-md-6">
+    @*<div class="col-md-6">
         <form method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -43,8 +41,139 @@
             </div>
             <button type="submit" class="btn btn-default">Save</button>
         </form>
+    </div>*@
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header" data-background-color="purple">
+                <h4 class="title">Edit Profile</h4>
+                <p class="category">Complete your profile</p>
+            </div>
+            <div class="card-content">
+                <form method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Company (disabled)</label>
+                                <input type="text" class="form-control" disabled="">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group label-floating">
+                                <label class="control-label" asp-for="Username">Username</label>
+                                <input type="text" class="form-control" asp-for="Username" disabled>
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Email address</label>
+                                <input type="email" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Fist Name</label>
+                                <input type="text" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Last Name</label>
+                                <input type="text" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Address</label>
+                                <input type="text" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label" asp-for="Input.PhoneNumber"></label>
+                                <input asp-for="Input.PhoneNumber" class="form-control" />
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">City</label>
+                                <input type="text" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Country</label>
+                                <input type="text" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label">Postal Code</label>
+                                <input type="text" class="form-control">
+                                <span class="material-input"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>About Me</label>
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                    <textarea class="form-control" rows="5"></textarea>
+                                    <span class="material-input"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right">Update Profile</button>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <!--Profile Card-->
+    <div class="col-md-4">
+        <div class="card card-profile">
+            <div class="card-avatar">
+                <a href="#">
+                    <img class="img" src="~/images/sidebar-2.jpg">
+                </a>
+            </div>
+            <div class="content">
+                <h6 class="category text-gray">CEO / Co-Founder / Cu Ly</h6>
+                <h4 class="card-title">Lam Le</h4>
+                <p class="card-content">
+                    This should be fetched professionally but this feature is yet to be implemented so...
+                </p>
+                <a href="#" class="btn btn-primary btn-round">Follow</a>
+            </div>
+        </div>
+    </div>
+    <!--END Profile Card-->
 </div>
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

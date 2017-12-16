@@ -23,7 +23,8 @@ declare module 'sweetalert2' {
     function swal(settings: SweetAlertOptions): Promise<any>;
 
     /**
-     * A namespace inside the default function, containing utility function for controlling the currently-displayed modal.
+     * A namespace inside the default function, containing utility function for controlling the currently-displayed
+     * modal.
      *
      * ex.
      *   import swal from 'sweetalert2';
@@ -155,12 +156,12 @@ declare module 'sweetalert2' {
         /**
          * Provide array of SweetAlert2 parameters to show multiple modals, one modal after another.
          */
-        function queue(steps: (SweetAlertOptions|string)[]): Promise<any>;
+        function queue(steps: Array<SweetAlertOptions | string>): Promise<any>;
 
         /**
          * Get the index of current modal in queue. When there's no active queue, null will be returned.
          */
-        function getQueueStep(): string|null;
+        function getQueueStep(): string | null;
 
         /**
          * Insert a modal to queue, you can specify modal positioning with second parameter.
@@ -205,13 +206,21 @@ declare module 'sweetalert2' {
         function noop(): void;
     }
 
-    export type SweetAlertType = 'success'|'error'|'warning'|'info'|'question'|undefined;
+    export type SweetAlertType = 'success' | 'error' | 'warning' | 'info' | 'question' | undefined;
 
-    export type SweetAlertInputType = 'text'|'email'|'password'|'number'|'tel'|'range'|'textarea'|'select'|'radio'|'checkbox'|'file'|'url'|undefined;
+    export type SweetAlertInputType =
+        'text' | 'email' | 'password' | 'number' | 'tel' | 'range' | 'textarea' | 'select' | 'radio' | 'checkbox' |
+        'file' | 'url' | undefined;
 
-    export type SweetAlertInputOptions = { [inputValue: string]: string };
+    export type SweetAlertDismissalReason = 'cancel' | 'close' | 'overlay' | 'esc' | 'timer';
 
-    export type SweetAlertInputAttributes = { [attribute: string]: string };
+    export interface SweetAlertInputOptions {
+        [inputValue: string]: string;
+    }
+
+    export interface SweetAlertInputAttributes {
+        [attribute: string]: string;
+    }
 
     export interface SweetAlertOptions {
         /**
@@ -243,16 +252,33 @@ declare module 'sweetalert2' {
          *
          * @default null
          */
-        html?: string|JQuery;
+        html?: string | JQuery;
 
         /**
          * The type of the modal.
-         * SweetAlert2 comes with 5 built-in types which will show a corresponding icon animation: warning, error, success, info and question.
+         * SweetAlert2 comes with 5 built-in types which will show a corresponding icon animation: 'warning', 'error',
+         * 'success', 'info' and 'question'.
          * It can either be put in the array under the key "type" or passed as the third parameter of the function.
          *
          * @default null
          */
         type?: SweetAlertType;
+
+        /**
+         * Whether or not SweetAlert2 should show a full screen click-to-dismiss backdrop.
+         *
+         * @default true
+         */
+        backdrop?: boolean;
+
+        /**
+         * Whether or not an alert should be treated as a toast notification.
+         * This option is normally coupled with the `position` parameter and a timer.
+         * Toasts are NEVER autofocused.
+         *
+         * @default false
+         */
+        toast?: boolean;
 
         /**
          * The container element for adding modal into (query selector only).
@@ -262,7 +288,8 @@ declare module 'sweetalert2' {
         target?: string;
 
         /**
-         * Input field type, can be text, email, password, number, tel, range, textarea, select, radio, checkbox, file and url.
+         * Input field type, can be text, email, password, number, tel, range, textarea, select, radio, checkbox, file
+         * and url.
          *
          * @default null
          */
@@ -273,7 +300,7 @@ declare module 'sweetalert2' {
          *
          * @default '500px'
          */
-        width?: number|string;
+        width?: number | string;
 
         /**
          * Modal window padding.
@@ -288,6 +315,23 @@ declare module 'sweetalert2' {
          * @default '#fff'
          */
         background?: string;
+
+        /**
+         * Modal window position
+         *
+         * @default 'center'
+         */
+        position?:
+            'top' | 'top-left' | 'top-right' |
+            'center' | 'center-left' | 'center-right' |
+            'bottom' | 'bottom-left' | 'bottom-right';
+
+        /**
+         * Modal window grow direction
+         *
+         * @default false
+         */
+        grow?: 'row' | 'column' | 'fullscreen' | false;
 
         /**
          * A custom CSS class for the modal.
@@ -322,7 +366,7 @@ declare module 'sweetalert2' {
          *
          * @default true
          */
-        allowEscapeKey?: boolean
+        allowEscapeKey?: boolean;
 
         /**
          * If set to false, the user can't confirm the modal by pressing the Enter or Space keys,
@@ -454,7 +498,7 @@ declare module 'sweetalert2' {
         showLoaderOnConfirm?: boolean;
 
         /**
-         * Function to execute before confirm, should return Promise.
+         * Function to execute before confirm, may be async (Promise-returning) or sync.
          *
          * ex.
          *   swal({
@@ -463,12 +507,12 @@ declare module 'sweetalert2' {
          *      '<input id="swal-input1" class="swal2-input">' +
          *      '<input id="swal-input2" class="swal2-input">',
          *    focusConfirm: false,
-         *    preConfirm: () => Promise.resolve([$('#swal-input1').val(), $('#swal-input2').val()])
+         *    preConfirm: () => [$('#swal-input1').val(), $('#swal-input2').val()]
          *  }).then(result => swal(JSON.stringify(result));
          *
          * @default null
          */
-        preConfirm?: (inputValue: any) => Promise<any>;
+        preConfirm?: (inputValue: any) => Promise<any | void> | any | void;
 
         /**
          * Add a customized icon for the modal. Should contain a string with the path or URL to the image.
@@ -523,7 +567,7 @@ declare module 'sweetalert2' {
          * If input parameter is set to "select" or "radio", you can provide options.
          * Object keys will represent options values, object values will represent options text values.
          */
-        inputOptions?: SweetAlertInputOptions|Promise<SweetAlertInputOptions>;
+        inputOptions?: SweetAlertInputOptions | Promise<SweetAlertInputOptions>;
 
         /**
          * Automatically remove whitespaces from both ends of a result string.
@@ -550,20 +594,18 @@ declare module 'sweetalert2' {
         inputAttributes?: SweetAlertInputAttributes;
 
         /**
-         * Validator for input field, should return a Promise.
+         * Validator for input field, may be async (Promise-returning) or sync.
          *
          * ex.
          *   swal({
          *     title: 'Select color',
          *     input: 'radio',
-         *     inputValidator: result => new Promise((resolve, reject) => {
-         *       result ? resolve() : reject('You need to select something!');
-         *     })
+         *     inputValidator: result => !result && 'You need to select something!'
          *   })
          *
          * @default null
          */
-        inputValidator?: (result: any) => Promise<void>;
+        inputValidator?: (inputValue: any) => Promise<string | null> | string | null;
 
         /**
          * A custom CSS class for the input field.
@@ -594,6 +636,13 @@ declare module 'sweetalert2' {
         progressStepsDistance?: string;
 
         /**
+         * Function to run when modal built, but not shown yet. Provides modal DOM element as the first argument.
+         *
+         * @default null
+         */
+        onBeforeOpen?: (modalElement: HTMLElement) => void;
+
+        /**
          * Function to run when modal opens, provides modal DOM element as the first argument.
          *
          * @default null
@@ -608,12 +657,22 @@ declare module 'sweetalert2' {
         onClose?: (modalElement: HTMLElement) => void;
 
         /**
-         * Determines whether dismissals (outside click, cancel button, close button, esc key) should reject, or resolve with an object of the format `{ dismiss: reason }`.
-         * Set it to `false` to get a cleaner control flow when using `await`, as explained here: https://github.com/limonte/sweetalert2/issues/485
+         * Determines whether dismissals (outside click, cancel button, close button, Esc key, timer) should
+         * resolve with an object of the format `{ dismiss: SweetAlertDismissalReason }` or reject the promise.
          *
-         * @default true
+         * @default false
+         * @deprecated
          */
         useRejections?: boolean;
+
+        /**
+         * Determines whether given `inputValidator` and `preConfirm` functions should be expected to to signal
+         * validation errors by rejecting, or by their respective means (see documentation for each option).
+         *
+         * @default false
+         * @deprecated
+         */
+        expectRejections?: boolean;
     }
 
     export default swal;
@@ -623,6 +682,8 @@ declare module 'sweetalert2' {
  * These interfaces aren't provided by SweetAlert2, but its definitions use them.
  * They will be merged with 'true' definitions.
  */
+
+// tslint:disable:no-empty-interface
 
 interface JQuery {
 }

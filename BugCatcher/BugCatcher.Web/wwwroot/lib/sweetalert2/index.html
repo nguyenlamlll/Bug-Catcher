@@ -33,8 +33,8 @@
 
 <body>
   <header>
-    <h1>Sweet<span>Alert</span>2</h1>
-    <h2>A beautiful, responsive, customizable, accessible (WAI-ARIA) replacement for JavaScript's popup boxes</h2>
+    <img src="./assets/swal2-logo.png" class="logo" width="498" alt="SweetAlert2 logo">
+    <h1>A beautiful, responsive, customizable, accessible (WAI-ARIA) replacement for JavaScript's popup boxes</h2>
     <h2>Zero dependencies</h2>
     <div class="carbonads-wrapper">
       <script src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=limontegithubiosweetalert2" id="_carbonads_js" async></script>
@@ -45,7 +45,7 @@
       Downloads last month: <a href="https://npm-stat.com/charts.html?package=sweetalert2" id="downloads-last-month" aria-label="Downloads last month "></a>
     </div>
     <a class="top-right-button download">Download</a>
-    <a href="https://cdnjs.com/libraries/limonte-sweetalert2" tabindex="-1" class="top-right-button cdn" target="_blank" rel="noopener">CDN</a>
+    <a href="https://unpkg.com/sweetalert2" tabindex="-1" class="top-right-button cdn" target="_blank" rel="noopener">CDN</a>
     <div class="top-right-button donate">
       <img src="./assets/paypal.png" width="32" height="32" alt="">
       <span>Donate</span>
@@ -60,7 +60,7 @@
   </div>
 
   <div class="showcase sweet">
-    <h4>Sweet<span>Alert</span>2</h4>
+    <img src="./assets/swal2-logo.png" height="30" alt="SweetAlert2">
     <button aria-label="Show SweetAlert2 success message">Show success message</button>
     <pre>
 swal(
@@ -112,6 +112,17 @@ swal(
 )</pre>
     </li>
 
+    <li id="long-text">
+      <div class="ui">
+        <p>A modal window with a long text inside:</p>
+        <button aria-label="Try me! Example: A modal window with a long text inside">Try me!</button>
+      </div>
+      <pre>
+swal({
+  html: <span class="str">'Less is more.&lt;br>'</span>.repeat(<span class="val">100</span>)
+})</pre>
+    </li>
+
     <li class="html" id="custom-html">
       <div class="ui">
         <p>Custom HTML description and buttons with ARIA labels</p>
@@ -127,13 +138,28 @@ swal({
     <span class="str">'and other HTML tags'</span>,
   showCloseButton: <span class="val">true</span>,
   showCancelButton: <span class="val">true</span>,
-  focusConfirm: <span class="val">false</span>
+  focusConfirm: <span class="val">false</span>,
   confirmButtonText:
     <span class="str">'&lt;i class="fa fa-thumbs-up"&gt;&lt;/i&gt; Great!'</span>,
   confirmButtonAriaLabel: <span class="str">'Thumbs up, great!'</span>,
   cancelButtonText:
   <span class="str">'&lt;i class="fa fa-thumbs-down"&gt;&lt;/i&gt;'</span>,
   cancelButtonAriaLabel: <span class="str">'Thumbs down'</span>,
+})</pre>
+    </li>
+
+    <li id="position">
+      <div class="ui">
+        <p>A custom positioned dialog</p>
+        <button aria-label="Try me! Example: A custom positioned dialog">Try me!</button>
+      </div>
+      <pre>
+swal({
+  position: <span class="str">'top-right'</span>,
+  type: <span class="str">'success'</span>,
+  title: <span class="str">'Your work has been saved'</span>,
+  showConfirmButton: <span class="val">false</span>,
+  timer: <span class="str">1500</span>
 })</pre>
     </li>
 
@@ -167,16 +193,18 @@ swal({
   confirmButtonColor: <span class="str">'#3085d6'</span>,
   cancelButtonColor: <span class="str">'#d33'</span>,
   confirmButtonText: <span class="str">'Yes, delete it!'</span>
-}).then(<span class="func"><i>function</i></span> () {
-  swal(
-    <span class="str">'Deleted!'</span>,
-    <span class="str">'Your file has been deleted.'</span>,
-    <span class="str">'success'</span>
-  )
+}).<span class="tag">then</span>((result) => {
+  <span class="tag">if</span> (result.value) {
+    swal(
+      <span class="str">'Deleted!'</span>,
+      <span class="str">'Your file has been deleted.'</span>,
+      <span class="str">'success'</span>
+    )
+  }
 })</pre>
     </li>
 
-    <li class="warning cancel" id="dismiss-handle">
+    <li class="bootstrap-buttons" id="dismiss-handle">
       <div class="ui">
         <p>... and by passing a parameter, you can execute something else for "Cancel".</p>
         <button aria-label="Try me! Example: passing a parameter, you can execute something else for 'Cancel'">Try me!</button>
@@ -193,17 +221,18 @@ swal({
   cancelButtonText: <span class="str">'No, cancel!'</span>,
   confirmButtonClass: <span class="str">'btn btn-success'</span>,
   cancelButtonClass: <span class="str">'btn btn-danger'</span>,
-  buttonsStyling: <span class="val">false</span>
-}).then(<span class="func"><i>function</i></span> () {
-  swal(
-    <span class="str">'Deleted!'</span>,
-    <span class="str">'Your file has been deleted.'</span>,
-    <span class="str">'success'</span>
-  )
-}, <span class="func"><i>function</i></span> (dismiss) {
-  <span class="comment">// dismiss can be 'cancel', 'overlay',</span>
+  buttonsStyling: <span class="val">false</span>,
+  reverseButtons: <span class="val">true</span>
+}).<span class="tag">then</span>((result) => {
+  <span class="tag">if</span> (result.value) {
+    swal(
+      <span class="str">'Deleted!'</span>,
+      <span class="str">'Your file has been deleted.'</span>,
+      <span class="str">'success'</span>
+    )
+  <span class="comment">// result.dismiss can be 'cancel', 'overlay',</span>
   <span class="comment">// 'close', and 'timer'</span>
-  <span class="tag">if</span> (dismiss === <span class="str">'cancel'</span>) {
+  } <span class="tag">else if</span> (result.dismiss === <span class="str">'cancel'</span>) {
     swal(
       <span class="str">'Cancelled'</span>,
       <span class="str">'Your imaginary file is safe :)'</span>,
@@ -254,18 +283,14 @@ swal({
   title: <span class="str">'Auto close alert!'</span>,
   text: <span class="str">'I will close in 5 seconds.'</span>,
   timer: <span class="val">5000</span>,
-  onOpen: <span class="func"><i>function</i></span> () {
+  onOpen: () => {
     swal.showLoading()
   }
-}).then(
-  <span class="func"><i>function</i></span> () {},
-  <span class="comment">// handling the promise rejection</span>
-  <span class="func"><i>function</i></span> (dismiss) {
-    <span class="tag">if</span> (dismiss === <span class="str">'timer'</span>) {
-      console.log(<span class="str">'I was closed by the timer'</span>)
-    }
+}).<span class="tag">then</span>((result) => {
+  <span class="tag">if</span> (result.dismiss === <span class="str">'timer'</span>) {
+    console.log(<span class="str">'I was closed by the timer'</span>)
   }
-)</pre>
+})</pre>
     </li>
 
     <li class="ajax-request" id="ajax-request">
@@ -280,24 +305,27 @@ swal({
   showCancelButton: <span class="val">true</span>,
   confirmButtonText: <span class="str">'Submit'</span>,
   showLoaderOnConfirm: <span class="val">true</span>,
-  preConfirm: <span class="func"><i>function</i></span> (email) {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve, reject) {
-      <span class="func">setTimeout</span>(<span class="func">function</span>() {
+  preConfirm: (email) => {
+    <span class="tag">return new</span> <span class="func">Promise</span>((resolve) => {
+      <span class="func">setTimeout</span>(() => {
         <span class="tag">if</span> (email === <span class="str">'taken@example.com'</span>) {
-          reject(<span class="str">'This email is already taken.'</span>)
-        } else {
-          resolve()
+          swal.showValidationError(
+            <span class="str">'This email is already taken.'</span>
+          )
         }
+        resolve()
       }, <span class="val">2000</span>)
     })
   },
   allowOutsideClick: <span class="val">false</span>
-}).then(<span class="func"><i>function</i></span> (email) {
-  swal({
-    type: <span class="str">'success'</span>,
-    title: <span class="str">'Ajax request finished!'</span>,
-    html: <span class="str">'Submitted email: '</span> + email
-  })
+}).<span class="tag">then</span>((result) => {
+  <span class="tag">if</span> (result.value) {
+    swal({
+      type: <span class="str">'success'</span>,
+      title: <span class="str">'Ajax request finished!'</span>,
+      html: <span class="str">'Submitted email: '</span> + result.value
+    })
+  }
 })</pre>
     </li>
 
@@ -323,18 +351,19 @@ swal.setDefaults({
   <span class="str">'Question 3'</span>
 ]
 
-swal.queue(steps).then(<span class="func"><i>function</i></span> (result) {
+swal.queue(steps).<span class="tag">then</span>((result) => {
   swal.resetDefaults()
-  swal({
-    title: <span class="str">'All done!'</span>,
-    html:
-      <span class="str">'Your answers: &lt;pre&gt;'</span> +
-        JSON.stringify(result) +
-      <span class="str">'&lt;/pre&gt;'</span>,
-    confirmButtonText: <span class="str">'Lovely!'</span>
-  })
-}, <span class="func"><i>function</i></span> () {
-  swal.resetDefaults()
+
+  <span class="tag">if</span> (result.value) {
+    swal({
+      title: <span class="str">'All done!'</span>,
+      html:
+        <span class="str">'Your answers: &lt;pre&gt;'</span> +
+          JSON.stringify(result.value) +
+        <span class="str">'&lt;/pre&gt;'</span>,
+      confirmButtonText: <span class="str">'Lovely!'</span>
+    })
+  }
 })</pre>
     </li>
 
@@ -344,6 +373,8 @@ swal.queue(steps).then(<span class="func"><i>function</i></span> (result) {
         <button aria-label="Try me! Example: Dynamic queue">Try me!</button>
       </div>
       <pre>
+const ipAPI = <span class="str">'https://api.ipify.org?format=json'</span>
+
 swal.queue([{
   title: <span class="str">'Your public IP'</span>,
   confirmButtonText: <span class="str">'Show my public IP'</span>,
@@ -351,13 +382,9 @@ swal.queue([{
     <span class="str">'Your public IP will be received '</span> +
     <span class="str">'via AJAX request'</span>,
   showLoaderOnConfirm: <span class="val">true</span>,
-  preConfirm: <span class="func"><i>function</i></span> () {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve) {
-      $.get(<span class="str">'https://api.ipify.org?format=json'</span>)
-        .done(<span class="func"><i>function</i></span> (data) {
-          swal.insertQueueStep(data.ip)
-          resolve()
-        })
+  preConfirm: () => {
+    <span class="tag">return</span> $.get(ipAPI).<span class="tag">then</span>((data) => {
+      swal.insertQueueStep(data.ip)
     })
   }
 }])</pre>
@@ -373,7 +400,7 @@ swal.queue([{
     <pre class="center">$ bower install sweetalert2</pre>
     <p>
       Or download from CDN:
-      <a href="https://cdnjs.com/libraries/limonte-sweetalert2" target="_blank" rel="noopener">cdnjs.com/limonte-sweetalert2 <i class="fa fa-external-link"></i></a>
+      <a href="https://unpkg.com/sweetalert2" target="_blank" rel="noopener">unpkg.com/sweetalert2 <i class="fa fa-external-link"></i></a>
     </p>
   </div>
 
@@ -447,6 +474,16 @@ swal.queue([{
         <td>The type of the modal. SweetAlert2 comes with 5 built-in types which will show a corresponding icon animation: <strong>warning</strong>, <strong>error</strong>, <strong>success</strong>, <strong>info</strong> and <strong>question</strong>. It can either be put in the array under the key "type" or passed as the third parameter of the function.</td>
       </tr>
       <tr>
+        <td><b>backdrop</b></td>
+        <td><i>true</i></td>
+        <td>Whether or not SweetAlert2 should show a full screen click-to-dismiss backdrop</td>
+      </tr>
+      <tr>
+        <td><b>toast</b></td>
+        <td><i>false</i></td>
+        <td> Whether or not an alert should be treated as a toast notification. This option is normally coupled with the <strong>position</strong> parameter and a timer. Toasts are NEVER autofocused.</td>
+      </tr>
+      <tr>
         <td><b>target</b></td>
         <td><i>'body'</i></td>
         <td>The container element for adding modal into.</td>
@@ -476,6 +513,16 @@ swal.queue([{
         <td><b>background</b></td>
         <td><i>'#fff'</i></td>
         <td>Modal window background (CSS background property).</td>
+      </tr>
+      <tr>
+        <td><b>position</b></td>
+        <td><i>'center'</i></td>
+        <td>Modal window position, can be <strong>'top'</strong>, <strong>'top-left'</strong>, <strong>'top-right'</strong>, <strong>'center'</strong>, <strong>'center-left'</strong>, <strong>'center-right'</strong>, <strong>'bottom'</strong>, <strong>'bottom-left'</strong>, or <strong>'bottom-right'</strong>.</td>
+      </tr>
+      <tr>
+        <td><b>grow</b></td>
+        <td><i>'false'</i></td>
+        <td>Paired with window position, sets the direction the modal should grow in, can be set to <strong>'row'</strong>, <strong>'column'</strong>, <strong>'fullscreen'</strong>, or <strong>false</strong>.</td>
       </tr>
       <tr>
         <td><b>customClass</b></td>
@@ -595,7 +642,7 @@ swal.queue([{
       <tr id="pre-confirm">
         <td><b>preConfirm</b></td>
         <td><i>null</i></td>
-        <td>Function to execute before confirm, should return Promise, see <a href="#ajax-request">usage example</a>.</td>
+        <td>Function to execute before confirm, may be async (Promise-returning) or sync, see <a href="#ajax-request">usage example</a>.</td>
       </tr>
       <tr id="image">
         <td><b>imageUrl</b></td>
@@ -650,7 +697,7 @@ swal.queue([{
       <tr id="input-validator">
         <td><b>inputValidator</b></td>
         <td><i>null</i></td>
-        <td>Validator for input field, should return Promise, see <a href="#select-box">usage example</a>.</td>
+        <td>Validator for input field, may be async (Promise-returning) or sync, see <a href="#input-select">usage example</a>.</td>
       </tr>
       <tr id="input-class">
         <td><b>inputClass</b></td>
@@ -673,6 +720,11 @@ swal.queue([{
         <td>Distance between progress steps.</td>
       </tr>
       <tr>
+        <td><b>onBeforeOpen</b></td>
+        <td><i>null</i></td>
+        <td>Function to run when modal built, but not shown yet. Provides modal DOM element as the first argument.</td>
+      </tr>
+      <tr>
         <td><b>onOpen</b></td>
         <td><i>null</i></td>
         <td>Function to run when modal opens, provides modal DOM element as the first argument.</td>
@@ -684,8 +736,13 @@ swal.queue([{
       </tr>
       <tr>
         <td><b>useRejections</b></td>
-        <td><i>true</i></td>
-        <td>Determines whether dismissals (outside click, cancel button, close button, esc key) should reject, or resolve with an object of the format <i>{ dismiss: reason }</i>. Set it to <i>false</i> to get a cleaner control flow when using <i>await</i>, as explained in <a href="https://github.com/limonte/sweetalert2/issues/485">#485</a>.</td>
+        <td><i>false</i></td>
+        <td><strong>Deprecated and will be removed in the next major release.</strong> Determines whether dismissals (outside click, cancel button, close button, Esc key, timer) should resolve with an object of the format <strong>{ dismiss: reason }</strong> or reject the promise.</td>
+      </tr>
+      <tr>
+        <td><b>expectRejections</b></td>
+        <td><i>false</i></td>
+        <td><strong>Deprecated and will be removed in the next major release.</strong> Determines whether given <strong>inputValidator</strong> and <strong>preConfirm</strong> functions should be expected to to signal validation errors by rejecting, or by their respective means (see documentation for each option). </td>
       </tr>
     </table>
 
@@ -699,7 +756,7 @@ swal.queue([{
   <div class="center-container">
     <h3>Handling Dismissals</h3>
 
-    <p class="center">When an alert is dismissed by the user, the Promise returned by <strong>swal()</strong> will reject with a string documenting the reason it was dismissed:</p>
+    <p class="center">When an alert is dismissed by the user, the Promise returned by <strong>swal()</strong> will be resolved with an object <strong>{ dismiss: reason }</strong> documenting the reason it was dismissed:</p>
 
     <table>
       <tr class="titles">
@@ -733,17 +790,6 @@ swal.queue([{
         <td><a href="#timer">timer</a></td>
       </tr>
     </table>
-
-    <p class="center">
-      If rejections are not handled, it will be logged as an error.
-      To avoid this, add a rejection handler to the Promise.<br>
-      Alternatively, you can use <strong>.catch(swal.noop)</strong> as a quick way to simply suppress the errors:
-    </p>
-
-    <pre>
-swal(...)
-  .catch(swal.noop)</pre>
-  </div>
 
   <!-- Modal Types -->
   <h3>Modal Types</h3>
@@ -794,26 +840,19 @@ swal(...)
       <td><strong>text</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: name} = <span class="func">await</span> swal({
   title: <span class="str">'What is your name?'</span>,
   input: <span class="str">'text'</span>,
   inputPlaceholder: <span class="str">'Enter your name or nickname'</span>,
   showCancelButton: <span class="val">true</span>,
-  inputValidator: <span class="func"><i>function</i></span> (value) {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve, reject) {
-      <span class="tag">if</span> (value) {
-        resolve()
-      } <span class="tag">else</span> {
-        reject(<span class="str">'You need to write something!'</span>)
-      }
-    })
+  inputValidator: (value) => {
+    <span class="tag">return</span> !value <span class="val">&&</span> <span class="str">'You need to write something!'</span>
   }
-}).then(<span class="func"><i>function</i></span> (name) {
-  swal({
-    type: <span class="str">'success'</span>,
-    title: <span class="str">'Hi, '</span> + name
-  })
-})</pre>
+})
+
+<span class="tag">if</span> (name) {
+  swal({type: <span class="str">'success'</span>, title: <span class="str">'Hi, '</span> + name})
+}</pre>
       </td>
       <td><button class="input-type-text" aria-label="Try me! Example: input type text">Try me!</button></td>
     </tr>
@@ -822,16 +861,15 @@ swal({
       <td><strong>email</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: email} = <span class="func">await</span> swal({
   title: <span class="str">'Input email address'</span>,
   input: <span class="str">'email'</span>,
   inputPlaceholder: <span class="str">'Enter your email address'</span>
-}).then(<span class="func"><i>function</i></span> (email) {
-  swal({
-    type: <span class="str">'success'</span>,
-    html: <span class="str">'Entered email: '</span> + email
-  })
-})</pre>
+})
+
+<span class="tag">if</span> (email) {
+  swal(<span class="str">'Entered email: '</span> + email)
+}</pre>
       </td>
       <td><button class="input-type-email" aria-label="Try me! Example: input type email">Try me!</button></td>
     </tr>
@@ -840,15 +878,14 @@ swal({
       <td><strong>url</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: url} = <span class="func">await</span> swal({
   input: <span class="str">'url'</span>,
   inputPlaceholder: <span class="str">'Enter the URL'</span>
-}).then(<span class="func"><i>function</i></span> (url) {
-  swal({
-    type: <span class="str">'success'</span>,
-    html: <span class="str">'Entered URL: '</span> + url
-  })
-})</pre>
+})
+
+<span class="tag">if</span> (url) {
+  swal(<span class="str">'Entered URL: '</span> + url)
+}</pre>
       </td>
       <td><button class="input-type-url">Try me!</button></td>
     </tr>
@@ -857,7 +894,7 @@ swal({
       <td><strong>password</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: password} = <span class="func">await</span> swal({
   title: <span class="str">'Enter your password'</span>,
   input: <span class="str">'password'</span>,
   inputPlaceholder: <span class="str">'Enter your password'</span>,
@@ -866,14 +903,11 @@ swal({
     <span class="str">'autocapitalize'</span>: <span class="str">'off'</span>,
     <span class="str">'autocorrect'</span>: <span class="str">'off'</span>
   }
-}).then(<span class="func"><i>function</i></span> (password) {
-  <span class="tag">if</span> (password) {
-    swal({
-      type: <span class="str">'success'</span>,
-      html: <span class="str">'Entered password: '</span> + password
-    })
-  }
-})</pre>
+})
+
+<span class="tag">if</span> (password) {
+  swal(<span class="str">'Entered password: '</span> + password)
+}</pre>
       </td>
       <td><button class="input-type-password" aria-label="Try me! Example: input type password">Try me!</button></td>
     </tr>
@@ -882,15 +916,15 @@ swal({
       <td><strong>textarea</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: text} = <span class="func">await</span> swal({
   input: <span class="str">'textarea'</span>,
   inputPlaceholder: <span class="str">'Type your message here'</span>,
   showCancelButton: <span class="val">true</span>
-}).then(<span class="func"><i>function</i></span> (text) {
-  <span class="tag">if</span> (text) {
-    swal(text)
-  }
-})</pre>
+})
+
+<span class="tag">if</span> (text) {
+  swal(text)
+}</pre>
       </td>
       <td><button class="input-type-textarea" aria-label="Try me! Example: input type textarea">Try me!</button></td>
     </tr>
@@ -899,7 +933,7 @@ swal({
       <td><strong>select</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: country} = <span class="func">await</span> swal({
   title: <span class="str">'Select Ukraine'</span>,
   input: <span class="str">'select'</span>,
   inputOptions: {
@@ -909,22 +943,20 @@ swal({
   },
   inputPlaceholder: <span class="str">'Select country'</span>,
   showCancelButton: <span class="val">true</span>,
-  inputValidator: <span class="func"><i>function</i></span> (value) {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve, reject) {
+  inputValidator: (value) => {
+    <span class="tag">return new</span> <span class="func">Promise</span>((resolve) => {
       <span class="tag">if</span> (value === <span class="str">'UKR'</span>) {
         resolve()
       } <span class="tag">else</span> {
-        reject(<span class="str">'You need to select Ukraine :)'</span>)
+        resolve(<span class="str">'You need to select Ukraine :)'</span>)
       }
     })
   }
-}).then(<span class="func"><i>function</i></span> (result) {
-  swal({
-    type: <span class="str">'success'</span>,
-    html: <span class="str">'You selected: '</span> + result
-  })
-})</pre>
+})
 
+<span class="tag">if</span> (country) {
+  swal(<span class="str">'You selected: '</span> + country)
+}</pre>
       </td>
       <td><button class="input-type-select" aria-label="Try me! Example: input type select">Try me!</button></td>
     </tr>
@@ -934,8 +966,8 @@ swal({
       <td>
         <pre>
 <span class="comment">// inputOptions can be an object or Promise</span>
-<span class="func">var</span> inputOptions = <span class="tag">new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve) {
-  setTimeout(<span class="func"><i>function</i></span> () {
+<span class="func">var</span> inputOptions = <span class="tag">new</span> <span class="func">Promise</span>((resolve) => {
+  <span class="func">setTimeout</span>(() => {
     resolve({
       <span class="str">'#ff0000'</span>: <span class="str">'Red'</span>,
       <span class="str">'#00ff00'</span>: <span class="str">'Green'</span>,
@@ -944,25 +976,18 @@ swal({
   }, <span class="val">2000</span>)
 })
 
-swal({
+<span class="val">const</span> {value: color} = <span class="func">await</span> swal({
   title: <span class="str">'Select color'</span>,
   input: <span class="str">'radio'</span>,
   inputOptions: inputOptions,
-  inputValidator: <span class="func"><i>function</i></span> (result) {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve, reject) {
-      <span class="tag">if</span> (result) {
-        resolve()
-      } <span class="tag">else</span> {
-        reject(<span class="str">'You need to select something!'</span>)
-      }
-    })
+  inputValidator: (value) => {
+    <span class="tag">return</span> !value && <span class="str">'You need to choose something!'</span>
   }
-}).then(<span class="func"><i>function</i></span> (result) {
-  swal({
-    type: <span class="str">'success'</span>,
-    html: <span class="str">'You selected: '</span> + result
-  })
-})</pre>
+})
+
+<span class="tag">if</span> (color) {
+  swal({html: <span class="str">'You selected: '</span> + result})
+}</pre>
       </td>
       <td><button class="input-type-radio" aria-label="Try me! Example: input type radio">Try me!</button></td>
     </tr>
@@ -971,7 +996,7 @@ swal({
       <td><strong>checkbox</strong></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: accept} = <span class="func">await</span> swal({
   title: <span class="str">'Terms and conditions'</span>,
   input: <span class="str">'checkbox'</span>,
   inputValue: <span class="val">1</span>,
@@ -979,21 +1004,14 @@ swal({
     <span class="str">'I agree with the terms and conditions'</span>,
   confirmButtonText:
     <span class="str">'Continue &lt;i class="fa fa-arrow-right&gt;&lt;/i&gt;'</span>,
-  inputValidator: <span class="func"><i>function</i></span> (result) {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve, reject) {
-      <span class="tag">if</span> (result) {
-        resolve()
-      } <span class="tag">else</span> {
-        reject(<span class="str">'You need to agree with T&amp;C'</span>)
-      }
-    })
+  inputValidator: (result) => {
+    <span class="tag">return</span> !result && <span class="str">'You need to agree with T&amp;C'</span>
   }
-}).then(<span class="func"><i>function</i></span> (result) {
-  swal({
-    type: <span class="str">'success'</span>,
-    text: <span class="str">'You agreed with T&amp;C :)'</span>
-  })
-})</pre>
+})
+
+<span class="tag">if</span> (accept) {
+  swal(<span class="str">'You agreed with T&amp;C :)'</span>)
+}</pre>
 
       </td>
       <td><button class="input-type-checkbox" aria-label="Try me! Example: input type checkbox">Try me!</button></td>
@@ -1003,24 +1021,26 @@ swal({
       <td><strong>file</strong></td>
       <td>
         <pre>
-swal({
-  title: <span class="str">'Select image',</span>
-  input: <span class="str">'file',</span>
+<span class="val">const</span> {value: file} = <span class="func">await</span> swal({
+  title: <span class="str">'Select image'</span>,
+  input: <span class="str">'file'</span>,
   inputAttributes: {
     <span class="str">'accept'</span>: <span class="str">'image/*'</span>,
     <span class="str">'aria-label'</span>: <span class="str">'Upload your profile picture'</span>
   }
-}).then(<span class="func"><i>function</i></span> (file) {
+})
+
+<span class="tag">if</span> (file) {
   <span class="func">var</span> reader = <span class="tag">new</span> <span class="func">FileReader</span>
-  reader.onload = <span class="func"><i>function</i></span> (e) {
+  reader.onload = (e) => {
     swal({
-      title: 'Your uploaded picture'
+      title: <span class="str">'Your uploaded picture'</span>,
       imageUrl: e.target.result,
       imageAlt: <span class="str">'The uploaded picture'</span>
     })
   }
   reader.readAsDataURL(file)
-})</pre>
+}</pre>
       </td>
       <td><button class="input-type-file" aria-label="Try me! Example: input type file">Try me!</button></td>
     </tr>
@@ -1047,30 +1067,30 @@ swal({
 
   <p id="multiple-inputs">
     Multiple inputs aren't supported, you can achieve them by using <strong>html</strong> and <strong>preConfirm</strong> parameters.<br>
-    Inside the <strong>preConfirm()</strong> function you can pass the custom result to the <strong>resolve()</strong> function as a parameter:
+    Inside the <strong>preConfirm()</strong> function you can return (or, if async, resolve with) the custom result:
   </p>
   <table class="modal-input-types">
     <tr id="multiple-inputs">
       <td class="mobile-hidden"></td>
       <td>
         <pre>
-swal({
+<span class="val">const</span> {value: formValues} = <span class="func">await</span> swal({
   title: <span class="str">'Multiple inputs'</span>,
   html:
     <span class="str">'&lt;input id="swal-input1" class="swal2-input"&gt;'</span> +
     <span class="str">'&lt;input id="swal-input2" class="swal2-input"&gt;'</span>,
   focusConfirm: <span class="val">false</span>,
-  preConfirm: <span class="func"><i>function</i></span> () {
-    <span class="tag">return new</span> <span class="func">Promise</span>(<span class="func"><i>function</i></span> (resolve) {
-      resolve([
-        $(<span class="str">'#swal-input1'</span>).val(),
-        $(<span class="str">'#swal-input2'</span>).val()
-      ])
-    })
+  preConfirm: () => {
+    <span class="tag">return</span> [
+      $(<span class="str">'#swal-input1'</span>).val(),
+      $(<span class="str">'#swal-input2'</span>).val()
+    ]
   }
-}).then(<span class="func"><i>function</i></span> (result) {
-  swal(JSON.stringify(result))
-}).catch(swal.noop)</pre>
+})
+
+<span class="tag">if</span> (formValues) {
+  swal(<span class="func">JSON</span>.stringify(formValues))
+}</pre>
 
       </td>
       <td><button class="input-type-multiple" aria-label="Try me! Example: multiple inputs">Try me!</button></td>
@@ -1227,27 +1247,32 @@ swal({
   <div class="collaborators">
     <div>
       <a href="https://github.com/toverux" target="_blank" rel="noopener" aria-label="Morgan Touverey-Quilling">
-        <img src="https://avatars1.githubusercontent.com/u/1343250?v=4&s=100" width="100" alt=""><br>@toverux
+        <img src="https://avatars1.githubusercontent.com/u/1343250?v=4&s=100" width="80" alt=""><br>@toverux
       </a>
     </div>
     <div>
       <a href="https://github.com/birjolaxew" target="_blank" rel="noopener" aria-label="Johan Fagerberg">
-        <img src="https://avatars2.githubusercontent.com/u/4542461?v=4&s=100" width="100" alt=""><br>@birjolaxew
+        <img src="https://avatars2.githubusercontent.com/u/4542461?v=4&s=100" width="80" alt=""><br>@birjolaxew
       </a>
     </div>
     <div>
       <a href="https://github.com/samturrell" target="_blank" rel="noopener" aria-label="Sam Turrell">
-        <img src="https://avatars1.githubusercontent.com/u/5918348?v=4&s=100" width="100" alt=""><br>@samturrell
+        <img src="https://avatars1.githubusercontent.com/u/5918348?v=4&s=100" width="80" alt=""><br>@samturrell
       </a>
     </div>
     <div>
       <a href="https://github.com/acupajoe" target="_blank" rel="noopener" aria-label="Joseph Schultz">
-        <img src="https://avatars3.githubusercontent.com/u/9093699?v=4&s=100" width="100" alt=""><br>@acupajoe
+        <img src="https://avatars3.githubusercontent.com/u/9093699?v=4&s=100" width="80" alt=""><br>@acupajoe
+      </a>
+    </div>
+    <div>
+      <a href="https://github.com/zenflow" target="_blank" rel="noopener" aria-label="Matthew Francis Brunetti">
+        <img src="https://avatars3.githubusercontent.com/u/3198597?v=4&s=100" width="80" alt=""><br>@zenflow
       </a>
     </div>
     <div>
       <a href="https://github.com/patrickhlauke" target="_blank" rel="noopener" aria-label="Patrick H. Lauke">
-        <img src="https://avatars2.githubusercontent.com/u/895831?v=4&s=100" width="100" alt=""><br>@patrickhlauke
+        <img src="https://avatars2.githubusercontent.com/u/895831?v=4&s=100" width="80" alt=""><br>@patrickhlauke
       </a>
     </div>
   </div>
@@ -1283,23 +1308,23 @@ swal({
 
 <script>
   /* global $, swal, FileReader */
-  $('.download').on('click', function () {
+  $('.download').on('click', () => {
     $('html, body').animate({scrollTop: $('.download-section').offset().top}, 1000)
   })
 
-  $('.donate').on('click', function () {
+  $('.donate').on('click', () => {
     $('html, body').animate({scrollTop: $('.donations-section').offset().top}, 1000)
   })
 
-  $('.showcase.normal button').on('click', function () {
+  $('.showcase.normal button').on('click', () => {
     window.alert('You clicked the button!')
   })
 
-  $('.showcase.sweet button').on('click', function () {
-    swal('Good job!', 'You clicked the button!', 'success').catch(swal.noop)
+  $('.showcase.sweet button').on('click', () => {
+    swal('Good job!', 'You clicked the button!', 'success')
   })
 
-  $('.paypal').on('click', function () {
+  $('.paypal').on('click', () => {
     swal({
       title: 'How would you like to pay?',
       input: 'select',
@@ -1310,39 +1335,35 @@ swal({
       },
       inputValue: 'eur',
       confirmButtonText: 'Pay with PayPal'
-    }).then(
-      function (currency) {
-        location.assign('https://www.paypal.me/limonte/5' + currency);
+    }).then((result) => {
+      if (result.value) {
+        location.assign('https://www.paypal.me/limonte/5' + result.value);
       }
-    ).catch(swal.noop)
+    })
 
     return false;
   })
 
-  $('.examples .message button').on('click', function () {
-    swal('Any fool can use a computer').catch(swal.noop)
+  $('.examples .message button').on('click', () => {
+    swal('Any fool can use a computer')
   })
 
-  $('.examples .timer button').on('click', function () {
+  $('.examples .timer button').on('click', () => {
     swal({
       title: 'Auto close alert!',
       text: 'I will close in 5 seconds.',
       timer: 5000,
-      onOpen: function() {
+      onOpen: () => {
         swal.showLoading()
       }
-    }).then(
-      function () {},
-      // handling the promise rejection
-      function (dismiss) {
-        if (dismiss === 'timer') {
-          console.log('I was closed by the timer')
-        }
+    }).then((result) => {
+      if (result.dismiss === 'timer') {
+        console.log('I was closed by the timer')
       }
-    )
+    })
   })
 
-  $('.examples .html button').on('click', function () {
+  $('.examples .html button').on('click', () => {
     swal({
       title: '<i>HTML</i> <u>example</u>',
       type: 'info',
@@ -1357,27 +1378,41 @@ swal({
       confirmButtonAriaLabel: 'Thumbs up, great!',
       cancelButtonText: '<i class="fa fa-thumbs-down"></i>',
       cancelButtonAriaLabel: 'Thumbs down'
-    }).catch(swal.noop)
+    })
   })
 
-  $('.examples .html-jquery button').on('click', function () {
+  $('.examples #position button').on('click', () => {
+    swal({
+      position: 'top-right',
+      type: 'success',
+      title: 'Your work has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  })
+
+  $('.examples .html-jquery button').on('click', () => {
     swal({
       title: 'jQuery HTML example',
       html: $('<div>').addClass('some-class').text('jQuery is everywhere.'),
       animation: false,
       customClass: 'animated tada'
-    }).catch(swal.noop)
+    })
   })
 
-  $('.examples .title-text button').on('click', function () {
-    swal('The Internet?', 'That thing is still around?', 'question').catch(swal.noop)
+  $('.examples .title-text button').on('click', () => {
+    swal('The Internet?', 'That thing is still around?', 'question')
   })
 
-  $('.examples .error button').on('click', function () {
-    swal('Oops...', 'Something went wrong!', 'error').catch(swal.noop)
+  $('.examples .error button').on('click', () => {
+    swal('Oops...', 'Something went wrong!', 'error')
   })
 
-  $('.examples .warning.confirm button').on('click', function () {
+  $('.examples #long-text button').on('click', () => {
+    swal({html: 'Less is more.<br>'.repeat(100)})
+  })
+
+  $('.examples .warning.confirm button').on('click', () => {
     swal({
       title: 'Are you sure?',
       text: 'You won\'t be able to revert this!',
@@ -1386,12 +1421,14 @@ swal({
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
-    }).then(function () {
-      swal('Deleted!', 'Your file has been deleted!', 'success')
-    }).catch(swal.noop)
+    }).then((result) => {
+      if (result.value) {
+        swal('Deleted!', 'Your file has been deleted!', 'success')
+      }
+    })
   })
 
-  $('.examples .warning.cancel button').on('click', function () {
+  $('.examples .bootstrap-buttons button').on('click', () => {
     swal({
       title: 'Are you sure?',
       text: 'Buttons below are styled with Bootstrap classes',
@@ -1403,18 +1440,27 @@ swal({
       cancelButtonText: 'No, cancel!',
       confirmButtonClass: 'btn btn-success',
       cancelButtonClass: 'btn btn-danger',
-      buttonsStyling: false
-    }).then(function () {
-      swal('Deleted!', 'Your file has been deleted!', 'success')
-    }, function (dismiss) {
-      // dismiss can be 'cancel', 'overlay', 'close', 'timer'
-      if (dismiss === 'cancel') {
-        swal('Cancelled', 'Your imaginary file is safe :)', 'error')
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        swal(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      // result.dismiss can be 'cancel', 'overlay', 'close', and 'timer'
+      } else if (result.dismiss === 'cancel') {
+        swal(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
       }
     })
   })
 
-  $('.examples .custom-image button').on('click', function () {
+  $('.examples .custom-image button').on('click', () => {
     swal({
       title: 'Sweet!',
       text: 'Modal with a custom image.',
@@ -1423,207 +1469,177 @@ swal({
       imageHeight: 200,
       imageAlt: 'Custom image',
       animation: false
-    }).catch(swal.noop)
+    })
   })
 
-  $('.examples .custom-width-padding-background button').on('click', function () {
+  $('.examples .custom-width-padding-background button').on('click', () => {
     swal({
       title: 'Custom width, padding, background.',
       width: 600,
       padding: 100,
       background: '#fff url(https://bit.ly/1Nqn9HU)'
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-text').on('click', function () {
-    swal({
-      title: 'What is your name?',
-      input: 'text',
-      inputPlaceholder: 'Enter your name or nickname',
-      showCancelButton: true,
-      inputValidator: function (value) {
-        return new Promise(function (resolve, reject) {
-          if (value) {
-            resolve()
-          } else {
-            reject('You need to write something!')
-          }
-        })
-      }
-    }).then(function (name) {
-      swal({
-        type: 'success',
-        title: 'Hi, ' + name
-      })
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-email').on('click', function () {
-    swal({
-      title: 'Input email address',
-      input: 'email',
-      inputPlaceholder: 'Enter your email address',
-    }).then(function (email) {
-      swal({
-        type: 'success',
-        html: 'Entered email: <strong>' + email + '</strong>'
-      })
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-url').on('click', function () {
-    swal({
-      input: 'url',
-      inputPlaceholder: 'Enter the URL'
-    }).then(function (url) {
-      swal({
-        type: 'success',
-        html: 'Entered URL: <strong>' + url + '</strong>'
-      })
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-password').on('click', function () {
-    swal({
-      title: 'Enter your password',
-      input: 'password',
-      inputPlaceholder: 'Enter your password',
-      inputAttributes: {
-        'maxlength': 10,
-        'autocapitalize': 'off',
-        'autocorrect': 'off'
-      }
-    }).then(function (password) {
-      if (password) {
-        swal({
-          type: 'success',
-          html: 'Entered password: <strong>' + password + '</strong>'
-        })
-      }
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-textarea').on('click', function () {
-    swal({
-      input: 'textarea',
-      inputPlaceholder: 'Type your message here',
-      inputAttributes: {
-        'aria-label': 'Type your message here'
-      },
-      showCancelButton: true
-    }).then(function (text) {
-      if (text) {
-        swal(text)
-      }
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-select').on('click', function () {
-    swal({
-      title: 'Select Ukraine',
-      input: 'select',
-      inputOptions: {
-        'SRB': 'Serbia',
-        'UKR': 'Ukraine',
-        'HRV': 'Croatia'
-      },
-      inputPlaceholder: 'Select country',
-      showCancelButton: true,
-      inputValidator: function (value) {
-        return new Promise(function (resolve, reject) {
-          if (value === 'UKR') {
-            resolve()
-          } else {
-            reject('You need to select Ukraine :)')
-          }
-        })
-      }
-    }).then(function (result) {
-      swal({
-        type: 'success',
-        html: 'You selected: <strong>' + result + '</strong>'
-      })
-    }).catch(swal.noop)
-  })
-
-  $('.input-type-radio').on('click', function () {
-    var inputOptionsPromise = new Promise(function (resolve) {
-      setTimeout(function () {
-        resolve({
-          '#FF0000': 'Red',
-          '#00FF00': 'Green',
-          '#0000FF': 'Blue'
-        })
-      }, 2000)
     })
+  })
 
-    swal({
-      title: 'Select color',
-      input: 'radio',
-      inputOptions: inputOptionsPromise,
-      inputValidator: function (value) {
-        return new Promise(function (resolve, reject) {
-          if (value) {
-            resolve()
-          } else {
-            reject('You need to choose something!')
-          }
-        })
-      }
-    }).then(function (result) {
-      swal({
-        type: 'success',
-        html: 'You selected: <strong>' + result + '</strong>'
+  $('.input-type-text').on('click', () => {
+    (async function getName() {
+      const {value: name} = await swal({
+        title: 'What is your name?',
+        input: 'text',
+        inputPlaceholder: 'Enter your name or nickname',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          return !value && 'You need to write something!'
+        }
+      });
+      name && swal({type: 'success', title: `Hi, ${name}`})
+    })()
+  })
+
+  $('.input-type-email').on('click', () => {
+    (async function getEmail() {
+      const {value: email} = await swal({
+        title: 'Input email address',
+        input: 'email',
+        inputPlaceholder: 'Enter your email address',
       })
-    }).catch(swal.noop)
+      email && swal({html: 'Entered email: <strong>' + email + '</strong>'})
+    })()
   })
 
-  $('.input-type-checkbox').on('click', function () {
-    swal({
-      title: 'Terms and conditions',
-      input: 'checkbox',
-      inputValue: 1,
-      inputPlaceholder: 'I agree with the terms and conditions',
-      confirmButtonText: 'Continue <i class="fa fa-arrow-right" style="margin-left: 10px"></i>',
-      inputValidator: function (result) {
-        return new Promise(function (resolve, reject) {
-          if (result) {
-            resolve()
-          } else {
-            reject('To continue you need to agree with T&amp;C')
-          }
-        })
-      }
-    }).then(function () {
-      swal({
-        type: 'success',
-        text: 'You agreed with T&C :)'
+  $('.input-type-url').on('click', () => {
+    (async function getUrl() {
+      const {value: url} = await swal({
+        input: 'url',
+        inputPlaceholder: 'Enter the URL'
       })
-    }).catch(swal.noop)
+      url && swal({html: 'Entered URL: <strong>' + url + '</strong>'})
+    })()
   })
 
-  $('.input-type-file').on('click', function () {
-    swal({
-      title: 'Select image',
-      input: 'file',
-      inputAttributes: {
-        'accept': 'image/*',
-        'aria-label': 'Upload your profile picture'
-      }
-    }).then(function (file) {
-      var reader = new FileReader()
-      reader.onload = function (e) {
-        swal({
-          title: 'Your uploaded picture',
-          imageUrl: e.target.result,
-          imageAlt: 'The uploaded picture'
-        }).catch(swal.noop)
-      }
-      reader.readAsDataURL(file)
-    }).catch(swal.noop)
+  $('.input-type-password').on('click', () => {
+    (async function getPassword() {
+      const {value: password} = await swal({
+        title: 'Enter your password',
+        input: 'password',
+        inputPlaceholder: 'Enter your password',
+        inputAttributes: {
+          'maxlength': 10,
+          'autocapitalize': 'off',
+          'autocorrect': 'off'
+        }
+      })
+      password && swal({html: 'Entered password: <strong>' + password + '</strong>'})
+    })()
   })
 
-  $('.input-type-range').on('click', function () {
+  $('.input-type-textarea').on('click', () => {
+    (async function getMessage() {
+      const {value: text} = await swal({
+        input: 'textarea',
+        inputPlaceholder: 'Type your message here',
+        inputAttributes: {
+          'aria-label': 'Type your message here'
+        },
+        showCancelButton: true
+      })
+      text && swal(text)
+    })()
+  })
+
+  $('.input-type-select').on('click', () => {
+    (async function getCountry() {
+      const {value: country} = await swal({
+        title: 'Select Ukraine',
+        input: 'select',
+        inputOptions: {
+          'SRB': 'Serbia',
+          'UKR': 'Ukraine',
+          'HRV': 'Croatia'
+        },
+        inputPlaceholder: 'Select country',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          return new Promise((resolve) => {
+            if (value === 'UKR') {
+              resolve()
+            } else {
+              resolve('You need to select Ukraine :)')
+            }
+          })
+        }
+      })
+      country && swal({html: 'You selected: <strong>' + country + '</strong>'})
+    })()
+  })
+
+  $('.input-type-radio').on('click', () => {
+    (async function getColor() {
+      var inputOptionsPromise = new Promise((resolve) => {
+        setTimeout(() => {
+          resolve({
+            '#FF0000': 'Red',
+            '#00FF00': 'Green',
+            '#0000FF': 'Blue'
+          })
+        }, 2000)
+      })
+
+      const {value: color} = await swal({
+        title: 'Select color',
+        input: 'radio',
+        inputOptions: inputOptionsPromise,
+        inputValidator: (value) => {
+          return !value && 'You need to choose something!'
+        }
+      })
+
+      color && swal({html: 'You selected: <strong>' + color + '</strong>'})
+    })()
+  })
+
+  $('.input-type-checkbox').on('click', () => {
+    (async function acceptTerms() {
+      const {value: accept} = await swal({
+        title: 'Terms and conditions',
+        input: 'checkbox',
+        inputValue: 1,
+        inputPlaceholder: 'I agree with the terms and conditions',
+        confirmButtonText: 'Continue <i class="fa fa-arrow-right" style="margin-left: 10px"></i>',
+        inputValidator: (result) => {
+          return !result && 'To continue you need to agree with T&amp;C'
+        }
+      })
+
+      accept && swal({text: 'You agreed with T&C :)'})
+    })()
+  })
+
+  $('.input-type-file').on('click', () => {
+    (async function getColor() {
+      const {value: file} = await swal({
+        title: 'Select image',
+        input: 'file',
+        inputAttributes: {
+          'accept': 'image/*',
+          'aria-label': 'Upload your profile picture'
+        }
+      })
+      if (file) {
+        var reader = new FileReader()
+        reader.onload = (e) => {
+          swal({
+            title: 'Your uploaded picture',
+            imageUrl: e.target.result,
+            imageAlt: 'The uploaded picture'
+          })
+        }
+        reader.readAsDataURL(file)
+      }
+    })()
+  })
+
+  $('.input-type-range').on('click', () => {
     swal({
       title: 'How old are you?',
       type: 'question',
@@ -1634,30 +1650,29 @@ swal({
         step: 1
       },
       inputValue: 25
-    }).catch(swal.noop)
+    })
   })
 
-  $('.input-type-multiple').on('click', function () {
-    swal({
-      title: 'Multiple inputs',
-      html:
-        '<input id="swal-input1" class="swal2-input" placeholder="first input field">' +
-        '<input id="swal-input2" class="swal2-input" placeholder="second input field">',
-      focusConfirm: false,
-      preConfirm: function () {
-        return new Promise(function (resolve) {
-          resolve([
+  $('.input-type-multiple').on('click', () => {
+    (async function getForm() {
+      const {value: formValues} = await swal({
+        title: 'Multiple inputs',
+        html:
+          '<input id="swal-input1" class="swal2-input" placeholder="first input field">' +
+          '<input id="swal-input2" class="swal2-input" placeholder="second input field">',
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
             $('#swal-input1').val(),
             $('#swal-input2').val()
-          ])
-        })
-      }
-    }).then(function (result) {
-      swal(JSON.stringify(result))
-    }).catch(swal.noop)
+          ]
+        }
+      })
+      formValues && swal(JSON.stringify(formValues))
+    })()
   })
 
-  $('.examples .ajax-request button').on('click', function () {
+  $('.examples .ajax-request button').on('click', () => {
     swal({
       title: 'Submit email to run ajax request',
       input: 'email',
@@ -1665,28 +1680,29 @@ swal({
       confirmButtonText: 'Submit',
       width: 600,
       showLoaderOnConfirm: true,
-      preConfirm: function (email) {
-        return new Promise(function (resolve, reject) {
-          setTimeout(function () {
+      preConfirm: (email) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
             if (email === 'taken@example.com') {
-              reject('This email is already taken.')
-            } else {
-              resolve()
+              swal.showValidationError('This email is already taken.')
             }
+            resolve()
           }, 2000)
         })
       },
       allowOutsideClick: false
-    }).then(function (email) {
-      swal({
-        type: 'success',
-        title: 'Ajax request finished!',
-        html: 'Submitted email: ' + '<strong>' + email + '</strong>'
-      })
-    }).catch(swal.noop)
+    }).then((result) => {
+      if (result.value) {
+        swal({
+          type: 'success',
+          title: 'Ajax request finished!',
+          html: 'Submitted email: <strong>' + result.value + '</strong>'
+        })
+      }
+    })
   })
 
-  $('.examples .chaining-modals button').on('click', function () {
+  $('.examples .chaining-modals button').on('click', () => {
     swal.setDefaults({
       input: 'text',
       confirmButtonText: 'Next &rarr;',
@@ -1700,42 +1716,38 @@ swal({
       'Question 3'
     ]
 
-    swal.queue(steps).then(function (result) {
+    swal.queue(steps).then((result) => {
       swal.resetDefaults()
-      swal({
-        title: 'All done!',
-        html: 'Your answers: <pre>' + JSON.stringify(result) + '</pre>',
-        confirmButtonText: 'Lovely!'
-      }).catch(swal.noop)
-    }, function () {
-      swal.resetDefaults()
+
+      if (result.value) {
+        swal({
+          title: 'All done!',
+          html: 'Your answers: <pre>' + JSON.stringify(result.value) + '</pre>',
+          confirmButtonText: 'Lovely!'
+        })
+      }
     })
   })
 
-  $('.examples .dynamic-queue button').on('click', function () {
+  $('.examples .dynamic-queue button').on('click', () => {
     swal.queue([
       {
         title: 'Your public IP',
         confirmButtonText: 'Show my public IP',
         text: 'Your public IP will be received via AJAX request',
-        currentProgressStep: 0,
         showLoaderOnConfirm: true,
-        preConfirm: function () {
-          return new Promise(function (resolve) {
-            $.get('https://api.ipify.org?format=json')
-              .done(function (data) {
-                swal.insertQueueStep(data.ip)
-                resolve()
-              })
+        preConfirm: () => {
+          return $.get('https://api.ipify.org?format=json').then((data) => {
+            swal.insertQueueStep(data.ip)
           })
         }
       }
-    ]).catch(swal.noop)
+    ])
   })
 
-  $('.modal-types button').on('click', function () {
+  $('.modal-types button').on('click', () => {
     var type = $(this).attr('class').slice(5)
-    swal(type + '!', '', type).catch(swal.noop)
+    swal(type + '!', '', type)
   })
 
   // Google Analytics

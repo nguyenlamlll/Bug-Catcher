@@ -6,6 +6,9 @@
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "sweetalert2": "^6.10.2"
+    "sweetalert2": "v7.1.0"
+  },
+  "resolutions": {
+    "sweetalert2": "v7.1.0"
   }
 }

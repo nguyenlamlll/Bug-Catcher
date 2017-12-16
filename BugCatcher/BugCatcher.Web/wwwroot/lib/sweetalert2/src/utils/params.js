@@ -4,8 +4,10 @@ export default {
   text: '',
   html: '',
   type: null,
+  toast: false,
   customClass: '',
   target: 'body',
+  backdrop: true,
   animation: true,
   allowOutsideClick: true,
   allowEscapeKey: true,
@@ -45,10 +47,19 @@ export default {
   inputClass: null,
   inputAttributes: {},
   inputValidator: null,
+  grow: false,
+  position: 'center',
   progressSteps: [],
   currentProgressStep: null,
   progressStepsDistance: '40px',
+  onBeforeOpen: null,
   onOpen: null,
   onClose: null,
-  useRejections: true
+  useRejections: false,
+  expectRejections: false
 }
+
+export const deprecatedParams = [
+  'useRejections',
+  'expectRejections'
+]
