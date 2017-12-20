@@ -23,7 +23,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Pages\Build\" />
-    <Folder Include="Pages\Company\Employee\" />
+    <Folder Include="Pages\Dashboard\Company\Employee\" />
     <Folder Include="Pages\Product\" />
     <Folder Include="Pages\Report\" />
     <Folder Include="wwwroot\images\documentation\" />

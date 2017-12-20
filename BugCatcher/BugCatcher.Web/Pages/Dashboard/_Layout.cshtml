@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -18,13 +21,71 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
+
+    @RenderSection("Styles", false)
 </head>
 
 <body>
     <div class="wrapper">
         <!--Side Bar-->
-        <div class="sidebar" data-color="purple">
-            
+        <div class="sidebar" data-color="blue">
+            <div class="logo">
+                <a id="logo-link" href="#" class="simple-text">
+                    Bug Catcher
+                </a>
+            </div>
+
+            <div class="sidebar-wrapper ps-container ps-theme-default ps-active-y" data-ps-id="56ef18fd-14fd-7cb9-880b-173e25d4147e">
+                <ul class="nav">
+                    <li>
+                        <a asp-page="/Account/Manage/Index">
+                            <i class="material-icons">keyboard_arrow_right</i>
+                            <p>To Profile</p>
+
+                        </a>
+                    </li>
+
+                    <li class="@DashboardNavPages.IndexNavClass(ViewContext)">
+                        <a asp-page="./Index">
+                            <i class="material-icons">person</i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+
+                    <li class="@DashboardNavPages.CompanyNavClass(ViewContext)">
+                        <a asp-page="./Company/Index">
+                            <i class="material-icons">person</i>
+                            <p>Company</p>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a asp-page="./Company/Index">
+                            <i class="material-icons">assignment</i>
+                            <p>Overview</p>
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a asp-page="./Company/Index">
+                            <i class="material-icons">assessment</i>
+                            <p>Insights</p>
+                        </a>
+                    </li>
+
+                    <li class="active-pro">
+                        <a href="upgrade.html">
+                            <i class="material-icons">unarchive</i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -136px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 136px; right: 0px; height: 294px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 93px; height: 201px;"></div></div>
+            </div>
+
+            <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-1.jpg)"></div>
+
         </div>
         <!--END Side Bar-->
 

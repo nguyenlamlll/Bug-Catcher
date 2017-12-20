@@ -11,7 +11,7 @@
 @foreach (var product in Model.Products)
 {
     <div class="container">
-        <a asp-page="../Product/Details" asp-route-id="@product.Id">@product.Name</a>
+        <a asp-page="/Product/Details" asp-route-id="@product.Id">@product.Name</a>
         <p>@product.Description</p>
     </div>
 }

@@ -11,7 +11,7 @@ using BugCatcher.Exception;
 using BugCatcher.DAL.Models;
 using Microsoft.AspNetCore.Identity;
 
-namespace BugCatcher.Web.Pages.Company
+namespace BugCatcher.Web.Pages.Dashboard.Company
 {
     public class IndexModel : PageModel
     {

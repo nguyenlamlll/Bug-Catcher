@@ -8,7 +8,7 @@ using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Models.Queries;
 using BugCatcher.DAL.Query.Models.Filters;
 
-namespace BugCatcher.Web.Pages.Company
+namespace BugCatcher.Web.Pages.Dashboard.Company
 {
     public class DetailsModel : PageModel
     {

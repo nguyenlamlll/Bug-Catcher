@@ -8,7 +8,7 @@ using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Models.Commands;
 using Microsoft.EntityFrameworkCore;
 
-namespace BugCatcher.Web.Pages.Company
+namespace BugCatcher.Web.Pages.Dashboard.Company
 {
     public class CreateModel : PageModel, IDisposable
     {
