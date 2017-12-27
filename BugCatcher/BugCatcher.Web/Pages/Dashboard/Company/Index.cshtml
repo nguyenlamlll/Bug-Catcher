@@ -15,8 +15,8 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a asp-page="/Company/Create">Company</a></li>
-                        <li><a asp-page="/Company/Report">Report</a></li>
+                        <li><a asp-page="/Dashboard/Company/Create">Company</a></li>
+                        <li><a asp-page="/Dashboard/Company/Report">Report</a></li>
                     </ul>
                 </div>
 
@@ -31,7 +31,7 @@
             {
                 <div class="container">
                     <h4>@item.Name</h4>
-                    <p>Products: @Model.Products.Count()</p>
+                    <p>Products: @item.NumberOfProducts</p>
                     <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">
                         Edit
                     </a> |

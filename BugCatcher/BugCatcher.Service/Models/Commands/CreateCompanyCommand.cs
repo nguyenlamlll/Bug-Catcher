@@ -13,5 +13,8 @@ namespace BugCatcher.Service.Models.Commands
                 ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
                 MinimumLength = 4)]
         public string Name { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; }
     }
 }

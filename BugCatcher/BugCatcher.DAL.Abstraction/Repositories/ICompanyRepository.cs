@@ -18,9 +18,9 @@ namespace BugCatcher.DAL.Abstraction.Repositories
         List<Company> GetCompany(CompanyFetchingFilter filter);
 
         /// <summary>
-        /// Create a report.
+        /// Create a company.
         /// </summary>
-        /// <param name="report"></param>
+        /// <param name="company"></param>
         void CreateCompany(Company company);
         void DeleteCompany(Guid id);
         void UpdateCompany(Company company);

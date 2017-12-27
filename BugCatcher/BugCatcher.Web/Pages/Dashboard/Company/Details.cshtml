@@ -7,11 +7,23 @@
     <link rel="stylesheet" type="text/css" href="~/css/section.css" />
     <link rel="stylesheet" type="text/css" href="~/css/container.css" />
 }
-
-@foreach (var product in Model.Products)
-{
-    <div class="container">
-        <a asp-page="/Product/Details" asp-route-id="@product.Id">@product.Name</a>
-        <p>@product.Description</p>
-    </div>
+@{
+    if (!Model.Products.Any())
+    {
+        <p>It seems a bit lonely here.</p>
+        <p>You don't have any product added here.</p>
+        <hr/>
+        <a asp-page="/Dashboard/Company/Index">Come back.</a>
+    }
+    else
+    {
+        foreach (var product in Model.Products)
+        {
+            <div class="container">
+                <a asp-page="/Product/Details" asp-route-id="@product.Id">@product.Name</a>
+                <p>@product.Description</p>
+            </div>
+        }
+    }
 }
+

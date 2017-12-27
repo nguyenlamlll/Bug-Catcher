@@ -8,23 +8,38 @@ using BugCatcher.Service.Models.Queries;
 using BugCatcher.DAL.Abstraction.Repositories;
 using BugCatcher.Service.Models.Commands.DataConversion;
 using Microsoft.EntityFrameworkCore;
+using BugCatcher.Service.Models.Commands.DataConversion;
+using BugCatcher.DAL.Models;
 
 namespace BugCatcher.Service.Implementation
 {
     public class CompanyService : ICompanyService
     {
         private readonly ICompanyRepository companyRepository;
-        public CompanyService(ICompanyRepository companyRepository)
+        private readonly ICompanyEnrollmentRepository companyEnrollmentRepository;
+        public CompanyService(ICompanyRepository companyRepository,
+            ICompanyEnrollmentRepository companyEnrollmentRepository)
         {
             this.companyRepository = companyRepository;
+            this.companyEnrollmentRepository = companyEnrollmentRepository;
         }
 
         void ICompanyService.CreateCompany(CreateCompanyCommand command)
         {
             try
             {
-                companyRepository.CreateCompany(command.ToCompany());
+                Company companyToCreate = command.ToCompany();
+                companyRepository.CreateCompany(companyToCreate);
                 companyRepository.Save();
+
+                CreateCompanyEnrollmentCommand enrollmentCommand = new CreateCompanyEnrollmentCommand()
+                {
+                    CompanyId = companyToCreate.Id,
+                    IsCompanyCreator = true,
+                    UserId = command.UserId
+                };
+                companyEnrollmentRepository.CreateCompanyEnrollment(enrollmentCommand.ToCompanyEnrollment());
+                companyEnrollmentRepository.Save();
             }
             catch (DbUpdateException ex)
             {
@@ -53,6 +68,7 @@ namespace BugCatcher.Service.Implementation
                 {
                     // TODO: dispose managed state (managed objects).
                     companyRepository.Dispose();
+                    companyEnrollmentRepository.Dispose();
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.

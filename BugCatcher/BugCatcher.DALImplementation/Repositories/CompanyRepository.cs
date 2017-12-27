@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 using BugCatcher.DAL.Models;
 using BugCatcher.DAL.Query.Models.Filters;
 using BugCatcher.DAL.Implementation.Data;
@@ -26,7 +27,12 @@ namespace BugCatcher.DAL.Implementation.Repositories
 
         Company ICompanyRepository.GetCompany(Guid id)
         {
-            return dbContext.Companies.Find(id);
+            var rawCompanies = dbContext.Companies
+                .Include(com => com.Products);
+            var result = (from companies in rawCompanies
+                          where companies.Id == id
+                          select companies).SingleOrDefault();
+            return result;
         }
 
         List<Company> ICompanyRepository.GetCompany(CompanyFetchingFilter filter)

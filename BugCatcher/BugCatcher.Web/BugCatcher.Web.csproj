@@ -22,6 +22,7 @@
     <ProjectReference Include="..\BugCatcher.Service\BugCatcher.Service.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helpers\" />
     <Folder Include="Pages\Build\" />
     <Folder Include="Pages\Dashboard\Company\Employee\" />
     <Folder Include="Pages\Product\" />

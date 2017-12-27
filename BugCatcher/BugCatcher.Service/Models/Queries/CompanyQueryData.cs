@@ -13,10 +13,12 @@ namespace BugCatcher.Service.Models.Queries
         {
             Id = company.Id;
             Name = company.Name;
+            NumberOfProducts = company.Products.Count;
         }
         #endregion
 
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public int NumberOfProducts { get; set; }
     }
 }

@@ -7,15 +7,19 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Models.Commands;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using BugCatcher.DAL.Models;
 
 namespace BugCatcher.Web.Pages.Dashboard.Company
 {
     public class CreateModel : PageModel, IDisposable
     {
+        private readonly UserManager<ApplicationUser> userManager;
         private ICompanyService companyService;
-        public CreateModel(ICompanyService companyService)
+        public CreateModel(ICompanyService companyService, UserManager<ApplicationUser> userManager)
         {
             this.companyService = companyService;
+            this.userManager = userManager;
         }
         public void OnGet()
         {
@@ -33,6 +37,7 @@ namespace BugCatcher.Web.Pages.Dashboard.Company
             }
             try
             {
+                Input.UserId = Guid.Parse(userManager.GetUserId(User));
                 companyService.CreateCompany(Input);
             }
             catch (DbUpdateException ex)

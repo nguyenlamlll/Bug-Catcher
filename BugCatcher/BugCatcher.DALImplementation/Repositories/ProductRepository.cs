@@ -61,6 +61,11 @@ namespace BugCatcher.DAL.Implementation.Repositories
             {
                 queryResult = queryResult.FilterReportsByName(filter.Name).ToList();
             }
+
+            if (filter.CompanyId != null)
+            {
+                queryResult = queryResult.FilterReportsByCompanyId(filter.CompanyId.Value).ToList();
+            }
             
             if (queryResult == null) { throw new NullResultException("Could not fetch any product."); }
             //if (!queryResult.Any()) { throw new NullResultException("Could not fetch any product."); }
