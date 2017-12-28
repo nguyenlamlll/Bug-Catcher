@@ -7,12 +7,28 @@
     <link rel="stylesheet" type="text/css" href="~/css/section.css" />
     <link rel="stylesheet" type="text/css" href="~/css/container.css" />
 }
+
+<div class="btn-group btn-group-lg">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        Create
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li>
+            <a asp-page="/Dashboard/Product/Create" 
+               asp-route-id="@Guid.Parse((Model.HttpContext.Request.Query["id"].ToString()))">
+                Product
+            </a>
+        </li>
+    </ul>
+</div>
+
 @{
     if (!Model.Products.Any())
     {
         <p>It seems a bit lonely here.</p>
-        <p>You don't have any product added here.</p>
-        <hr/>
+        <p>Add some products first.</p>
+        <hr />
         <a asp-page="/Dashboard/Company/Index">Come back.</a>
     }
     else
@@ -20,7 +36,7 @@
         foreach (var product in Model.Products)
         {
             <div class="container">
-                <a asp-page="/Product/Details" asp-route-id="@product.Id">@product.Name</a>
+                <a asp-page="/Dashboard/Product/Details" asp-route-id="@product.Id">@product.Name</a>
                 <p>@product.Description</p>
             </div>
         }

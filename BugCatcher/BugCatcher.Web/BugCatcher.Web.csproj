@@ -25,7 +25,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Pages\Build\" />
     <Folder Include="Pages\Dashboard\Company\Employee\" />
-    <Folder Include="Pages\Product\" />
+    <Folder Include="Pages\Dashboard\Product\" />
     <Folder Include="Pages\Report\" />
     <Folder Include="wwwroot\images\documentation\" />
   </ItemGroup>

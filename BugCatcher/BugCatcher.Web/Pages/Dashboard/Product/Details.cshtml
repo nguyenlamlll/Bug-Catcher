@@ -36,7 +36,7 @@
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            <a asp-page="../Report/Create" asp-route-id="@item.Id">Add reports</a> |
+                            <a asp-page="/Report/Create" asp-route-id="@item.Id">Add reports</a> |
                             <a asp-page="./Delete" asp-route-id="@item.Id">Delete build</a>
                         </td>
                     </tr>

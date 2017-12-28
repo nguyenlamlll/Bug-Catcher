@@ -8,7 +8,7 @@ using BugCatcher.Service.Abstraction;
 using BugCatcher.Service.Models.Queries;
 using BugCatcher.DAL.Query.Models.Filters;
 
-namespace BugCatcher.Web.Pages.Product
+namespace BugCatcher.Web.Pages.Dashboard.Product
 {
     /// <summary>
     /// Details of a product.
