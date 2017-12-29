@@ -2,6 +2,8 @@
 @model DetailsModel
 @{
     ViewData["Title"] = "Product Details";
+    ViewData["CurrentCompany"] = Model.ThisProduct.Company.Name;
+    ViewData["CurrentCompanyId"] = Model.ThisProduct.Company.Id;
 }
 @section Styles {
     <link rel="stylesheet" type="text/css" href="~/css/section.css" />
@@ -11,6 +13,7 @@
     <section>
         <header class="section-header">
             <h2>@Model.ThisProduct.Name</h2>
+            <p>&copy; @Model.ThisProduct.Company.Name</p>
         </header>
 
         <table class="table">

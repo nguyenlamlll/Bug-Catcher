@@ -2,6 +2,8 @@
 @model DetailsModel
 @{
     ViewData["Title"] = "Company Details";
+    ViewData["CurrentCompany"] = Model.CurrentCompany.Name;
+    ViewData["CurrentCompanyId"] = Guid.Parse((Model.HttpContext.Request.Query["id"].ToString()));
 }
 @section Styles {
     <link rel="stylesheet" type="text/css" href="~/css/section.css" />
@@ -15,7 +17,7 @@
     </button>
     <ul class="dropdown-menu" role="menu">
         <li>
-            <a asp-page="/Dashboard/Product/Create" 
+            <a asp-page="/Dashboard/Product/Create"
                asp-route-id="@Guid.Parse((Model.HttpContext.Request.Query["id"].ToString()))">
                 Product
             </a>

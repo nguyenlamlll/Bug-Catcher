@@ -12,12 +12,17 @@ namespace BugCatcher.Web.Pages.Dashboard.Company
 {
     public class DetailsModel : PageModel
     {
-        private IProductService productService;
+        public CompanyQueryData CurrentCompany { get; private set; }
+
+        private readonly ICompanyService companyService;
+        private readonly IProductService productService;
         public IList<ProductQueryData> Products { get; set; }
 
-        public DetailsModel(IProductService productService)
+        public DetailsModel(IProductService productService,
+            ICompanyService companyService)
         {
             this.productService = productService;
+            this.companyService = companyService;
         }
 
         public async Task<IActionResult> OnGetAsync(Guid? id)
@@ -27,7 +32,8 @@ namespace BugCatcher.Web.Pages.Dashboard.Company
                 return NotFound();
             }
 
-            // TO DO: Load products of this company.
+            CurrentCompany = companyService.GetCompany(id.Value);
+
             Products = productService.GetProduct(new ProductFetchingFilter()
             {
                 CompanyId = id

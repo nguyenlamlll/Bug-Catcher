@@ -37,7 +37,9 @@ namespace BugCatcher.DAL.Implementation.Repositories
         List<Build> IBuildRepository.GetBuild(BuildFetchingFilter filter)
         {
             List<Build> builds = new List<Build>();
-            var buildList = dbContext.Builds.Include(bld => bld.Reports);
+            var buildList = dbContext.Builds
+                .Include(bld => bld.Reports)
+                .Include(bld => bld.Product);
             builds = (from records in buildList
                       select records).ToList();
 

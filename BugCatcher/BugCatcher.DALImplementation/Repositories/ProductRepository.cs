@@ -28,7 +28,11 @@ namespace BugCatcher.DAL.Implementation.Repositories
 
         Product IProductRepository.GetProduct(Guid id)
         {
-            Product queryResult = dbContext.Products.Find(id);
+            var rawProducts = dbContext.Products
+                .Include(p => p.Company);
+            Product queryResult = (from products in rawProducts
+                                   where products.Id == id
+                                   select products).SingleOrDefault();
             if (queryResult == null)
             {
                 throw new NullResultException(String.Format("There is no ", id));

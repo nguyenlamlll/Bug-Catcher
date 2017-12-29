@@ -37,6 +37,7 @@ namespace BugCatcher.DAL.Implementation.Repositories
         {
             var report = dbContext.Reports
                 .Include(r => r.Reporter)
+                .Include(r => r.Build).ThenInclude(b => b.Product)
                 .Where(r => r.Id == id)
                 .SingleOrDefault();
 

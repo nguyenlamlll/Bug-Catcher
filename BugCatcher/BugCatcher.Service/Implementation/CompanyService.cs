@@ -49,7 +49,16 @@ namespace BugCatcher.Service.Implementation
 
         CompanyQueryData ICompanyService.GetCompany(Guid id)
         {
-            throw new NotImplementedException();
+            CompanyQueryData result = null;
+            try
+            {
+                result = new CompanyQueryData(companyRepository.GetCompany(id));
+            }
+            catch (DbUpdateException ex)
+            {
+
+            }
+            return result; 
         }
 
         List<CompanyQueryData> ICompanyService.GetCompany(CompanyFetchingFilter filter)

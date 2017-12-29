@@ -11,26 +11,26 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.BugReport.Title)
+            @Html.DisplayNameFor(model => model.Report.Title)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BugReport.Title)
+            @Html.DisplayFor(model => model.Report.Title)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BugReport.Description)
+            @Html.DisplayNameFor(model => model.Report.Description)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BugReport.Description)
+            @Html.DisplayFor(model => model.Report.Description)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.BugReport.DateOfCreated)
+            @Html.DisplayNameFor(model => model.Report.DateOfCreated)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.BugReport.DateOfCreated)
+            @Html.DisplayFor(model => model.Report.DateOfCreated)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.BugReport.Id">Edit</a> |
+    <a asp-page="./Edit" asp-route-id="@Model.Report.Id">Edit</a> |
     <a asp-page="./Index">Back to List</a>
 </div>
