@@ -62,6 +62,8 @@ namespace BugCatcher.DAL.Implementation.Repositories
         List<Report> IReportRepository.GetReport(ReportFetchingFilter filter)
         {
             List<Report> resultList = dbContext.Reports //.Include(report => report.Build)
+                .Include(r => r.Reporter)
+                .Include(r => r.Build).ThenInclude(b => b.Product)
                 .ToList();
 
             // Apply filters

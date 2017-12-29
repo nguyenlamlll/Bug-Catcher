@@ -1,0 +1,46 @@
+﻿@page
+@model DetailsModel
+@{
+    ViewData["Title"] = "Build Details";
+}
+
+<div class="row">
+    <h3>@Model.Reports[0].ProductName</h3>
+    <h4>@Model.Reports[0].BuildName</h4>
+
+    <a id="createReportButton" class="btn btn-primary" 
+       asp-page="/Dashboard/Report/Create" asp-route-id="@Model.CurrentBuildId">
+        New Report
+    </a>
+    <button type="button" class="btn btn-primary">Statistics</button>
+</div>
+<div class="row">
+    <div class="container">
+        @{
+            foreach (var report in Model.Reports)
+            {
+                <div class="card" style="width: 30rem;">
+                    <div class="card-header" data-background-color="red">
+                        <div class="category">
+                            Bug
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h5 class="title">@report.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@report.Id</h6>
+                        <p class="card-text">@report.Description</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a href="#" class="btn btn-primary btn-sm">Resolve</a>
+                        <a href="#" class="btn btn-primary btn-sm">Comment</a>
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+
+    </div>
+</div>

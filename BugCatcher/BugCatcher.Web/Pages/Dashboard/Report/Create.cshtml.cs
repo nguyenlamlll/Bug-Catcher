@@ -12,7 +12,7 @@ using BugCatcher.Web.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace BugCatcher.Web.Pages.Report
+namespace BugCatcher.Web.Pages.Dashboard.Report
 {
     /// <summary>
     /// Page Model for Creating new reports.
@@ -63,11 +63,11 @@ namespace BugCatcher.Web.Pages.Report
             {
                 ModelState.AddModelError("DbError", "Unable to save changes. Please try again.");
             }
-            var redirectId = buildService.GetBuild(BuildId).ProductId;
+            //var redirectId = buildService.GetBuild(BuildId).ProductId;
             this.Dispose();
 
-            return RedirectToPage("/Product/Details", 
-                new { id = redirectId });
+            return RedirectToPage("/Dashboard/Build/Details", 
+                new { id = BuildId });
         }
 
 

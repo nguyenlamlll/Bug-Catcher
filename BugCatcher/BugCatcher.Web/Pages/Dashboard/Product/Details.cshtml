@@ -30,14 +30,16 @@
             {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Id)
+                            <a asp-page="/Dashboard/Build/Details" asp-route-id="@item.Id">
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Name)
                         </td>
                         <td>
-                            <a asp-page="/Report/Create" asp-route-id="@item.Id">Add reports</a> |
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete build</a>
+                            <a asp-page="/Dashboard/Report/Create" asp-route-id="@item.Id">Add reports</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
                 }

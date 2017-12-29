@@ -20,6 +20,8 @@ namespace BugCatcher.Service.Models.Queries
             ReproduceSteps = report.ReproduceSteps;
             DateOfCreated = report.DateOfCreated;
             Reporter = new UserData(report.Reporter);
+            ProductName = report.Build.Product.Name;
+            BuildName = report.Build.Name;
         }
         #endregion
         public Guid Id { get; set; }
@@ -33,5 +35,9 @@ namespace BugCatcher.Service.Models.Queries
         public DateTime DateOfCreated { get; set; }
 
         public UserData Reporter { get; set; }
+
+        public string ProductName { get; set; }
+
+        public string BuildName { get; set; }
     }
 }

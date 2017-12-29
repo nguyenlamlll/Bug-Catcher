@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using BugCatcher.Service.Models.Queries;
 using BugCatcher.Service.Abstraction;
 
-namespace BugCatcher.Web.Pages.Report
+namespace BugCatcher.Web.Pages.Dashboard.Report
 {
     public class DetailsModel : PageModel, IDisposable
     {

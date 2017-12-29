@@ -9,7 +9,7 @@ using BugCatcher.Service.Abstraction;
 using BugCatcher.DAL.Query.Models.Filters;
 using System.Data.SqlClient;
 
-namespace BugCatcher.Web.Pages.Report
+namespace BugCatcher.Web.Pages.Dashboard.Report
 {
     public class IndexModel : PageModel
     {
