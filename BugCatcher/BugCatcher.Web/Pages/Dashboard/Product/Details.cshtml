@@ -9,6 +9,14 @@
     <link rel="stylesheet" type="text/css" href="~/css/section.css" />
     <link rel="stylesheet" type="text/css" href="~/css/container.css" />
 }
+
+<div class="container">
+    <a id="createBuildButton" class="btn btn-primary"
+       asp-page="/Dashboard/Build/Create" asp-route-id="@Model.ThisProduct.Id">
+        New Build
+    </a>
+</div>
+
 <div class="container">
     <section>
         <header class="section-header">
@@ -30,7 +38,7 @@
             </thead>
             <tbody>
                 @foreach (var item in Model.Builds)
-            {
+                {
                     <tr>
                         <td>
                             <a asp-page="/Dashboard/Build/Details" asp-route-id="@item.Id">

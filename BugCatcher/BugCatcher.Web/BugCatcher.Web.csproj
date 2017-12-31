@@ -23,7 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
-    <Folder Include="Pages\Dashboard\Build\" />
     <Folder Include="Pages\Dashboard\Company\Employee\" />
     <Folder Include="Pages\Dashboard\Product\" />
     <Folder Include="Pages\Dashboard\Report\" />
