@@ -12,7 +12,7 @@ namespace BugCatcher.Service.Abstraction
         void CreateComment(CreateCommentCommand command);
         void DeleteComment(Guid id);
 
-        CommentQueryData GetComment(Guid reportId);
+        CommentQueryData GetComment(Guid id);
         List<CommentQueryData> GetComment(CommentFetchingFilter filter);
     }
 }

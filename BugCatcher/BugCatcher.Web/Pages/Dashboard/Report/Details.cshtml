@@ -2,12 +2,13 @@
 @model DetailsModel
 @{
     ViewData["Title"] = "Report Details";
+
 }
 
 
 <h2>Details</h2>
-<div>
-    <h4>BugReport</h4>
+<div class="container">
+    <h3>Bug Report #@Model.Report.Id.ToString().Split("-").ToList()[0]</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -30,7 +31,66 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Report.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
+<hr />
+<div class="container">
+    <!--Activities section-->
+    <div class="col-lg-8">
+        <ul class="nav nav-pills">
+            <li class="active"><a data-toggle="pill" href="#CommentTab">Comments</a></li>
+            <li><a data-toggle="pill" href="#HistoryTab">History</a></li>
+            <li><a data-toggle="pill" href="#ActivityTab">Activities</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="CommentTab" class="tab-pane fade in active">
+                <div class="row" style="padding-top:1em">
+                    @{
+                        foreach (var comment in Model.Comments)
+                        {
+                            <div class="col-lg-1">
+                                <button type="button" class="btn btn-sm btn-info" aria-label="Left Align">
+                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                </button>
+                            </div>
+
+                            <div class="col-lg-10">
+                                <p>
+                                    <span style="color:blue"><a href="#">@comment.User.UserName</a></span> added a comment on @comment.DateOfCreated.ToLocalTime():
+                                </p>
+                                <p class="">@comment.Content</p>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+
+            <div id="HistoryTab" class="tab-pane fade">
+                <div class="row" style="padding-top:1em">
+                    <p>Some commented about this report.</p>
+                    <p>Someone added this report.</p>
+                </div>
+            </div>
+
+            <div id="ActivityTab" class="tab-pane fade">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <h5>Add a comment</h5>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Command.Content" class="control-label"></label>
+                <input asp-for="Command.Content" class="form-control" />
+                <span asp-validation-for="Command.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+    <!--END Activities section-->
 </div>
+

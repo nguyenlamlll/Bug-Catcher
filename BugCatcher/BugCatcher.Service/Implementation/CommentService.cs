@@ -20,6 +20,7 @@ namespace BugCatcher.Service.Implementation
 
         void ICommentService.CreateComment(CreateCommentCommand command)
         {
+            command.DateOfCreated = DateTime.UtcNow;
             commentRepository.CreateComment(command.ToComment());
         }
 
@@ -28,7 +29,7 @@ namespace BugCatcher.Service.Implementation
             commentRepository.DeleteComment(id);
         }
 
-        CommentQueryData ICommentService.GetComment(Guid reportId)
+        CommentQueryData ICommentService.GetComment(Guid id)
         {
             throw new NotImplementedException();
         }
