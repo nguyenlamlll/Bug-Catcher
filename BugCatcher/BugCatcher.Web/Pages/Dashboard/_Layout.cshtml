@@ -95,7 +95,7 @@
                 <div class="container-fluid">
                     <!--Navigation Bar Header-->
                     <div class="navbar-header">
-                        
+
                         <button type="button" class="navbar-toggle" data-toggle="collapse">
                             <span class="sr-only">Toggle navigation</span>
                             <!--Hamburger Icon-->
@@ -110,17 +110,28 @@
                             if (ViewData["CurrentCompanyId"] != null)
                             {
                                 <div id="navDiv" class="navbar-brand">
+
                                     <a class="dropdown-toggle" data-toggle="dropdown"
                                        asp-page="/Dashboard/Company/Details"
-                                       asp-route-id="@ViewData[" CurrentCompanyId"]">
+                                       asp-route-id="@ViewData["CurrentCompanyId"]">
                                         <p>@ViewData["CurrentCompany"]<span class="caret"></span></p>
                                     </a>
                                     <ul class="dropdown-menu" role="menu">
+                                        <li class="dropdown-header">My companies</li>
                                         <li>
-                                            <a>Other company 1</a>
+                                            <a asp-page="/Dashboard/Company/Details" asp-route-id="@ViewData["CurrentCompanyId"]">@ViewData["CurrentCompany"]</a>
                                             <a>Other company 2</a>
+                                            <a>Other company 3</a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li class="dropdown-header">Recent projects/teams</li>
+                                        <li>
+                                            <a>AAA Team</a>
+                                            <a>BBB Company</a>
+                                            <a>Browse&hellip;</a>
                                         </li>
                                     </ul>
+
 
                                 </div>
                             }
