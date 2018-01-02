@@ -30,7 +30,7 @@
         <!--Side Bar-->
         <div class="sidebar" data-color="blue">
             <div class="logo">
-                <a id="logo-link" href="#" class="simple-text">
+                <a id="logo-link" asp-page="/Index" class="simple-text">
                     Bug Catcher
                 </a>
             </div>
@@ -76,7 +76,7 @@
                     <li class="active-pro">
                         <a href="upgrade.html">
                             <i class="material-icons">unarchive</i>
-                            <p>Upgrade to PRO</p>
+                            <p>Settings</p>
                         </a>
                     </li>
 
@@ -122,6 +122,7 @@
                                             <a asp-page="/Dashboard/Company/Details" asp-route-id="@ViewData["CurrentCompanyId"]">@ViewData["CurrentCompany"]</a>
                                             <a>Other company 2</a>
                                             <a>Other company 3</a>
+                                            <a asp-page="/Dashboard/Company/Index">Browse&hellip;</a>
                                         </li>
                                         <li class="divider"></li>
                                         <li class="dropdown-header">Recent projects/teams</li>
@@ -244,9 +245,6 @@
         <!--END Main Panel-->
     </div>
 
-    @RenderSection("Scripts", required: false)
-
-
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -292,5 +290,7 @@
 
         });
         </script>*@
+
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

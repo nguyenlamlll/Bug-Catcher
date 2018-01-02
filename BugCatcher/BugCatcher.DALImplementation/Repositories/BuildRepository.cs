@@ -28,9 +28,13 @@ namespace BugCatcher.DAL.Implementation.Repositories
 
         Build IBuildRepository.GetBuild(Guid id)
         {
-            var build = dbContext.Builds.Find(id);
-            dbContext.Products.Where(p => p.Id == build.ProductId).Load();
-            
+            //var build = dbContext.Builds.Find(id);
+            //dbContext.Products.Where(p => p.Id == build.ProductId).Load();
+            var rawBuildList = dbContext.Builds
+                .Include(b => b.Product);
+            var build = (from records in rawBuildList
+                         where records.Id == id
+                         select records).SingleOrDefault();
             return build;
         }
 

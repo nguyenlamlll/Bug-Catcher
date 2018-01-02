@@ -12,7 +12,7 @@ namespace BugCatcher.Web.Pages
 
         public void OnGet()
         {
-            Message = "Your contact page.";
+            Message = "Please contact us at: ";
         }
     }
 }

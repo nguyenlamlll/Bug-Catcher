@@ -16,6 +16,12 @@ namespace BugCatcher.Web.Pages.Dashboard.Report
 {
     public class DetailsModel : PageModel, IDisposable
     {
+        public ProductQueryData CurrentProduct { get; set; }
+        public BuildQueryData CurrentBuild { get; set; }
+
+        private readonly IBuildService buildService;
+        private readonly IProductService productService;
+
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly IReportService reportService;
         private readonly ICommentService commentService;
@@ -23,11 +29,16 @@ namespace BugCatcher.Web.Pages.Dashboard.Report
         public List<CommentQueryData> Comments { get; set; }
 
         public DetailsModel(IReportService reportService, ICommentService commentService,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IBuildService buildService,
+            IProductService productService)
         {
             this.reportService = reportService;
             this.commentService = commentService;
             this.httpContextAccessor = httpContextAccessor;
+
+            this.buildService = buildService;
+            this.productService = productService;
         }
         public void Dispose()
         {
@@ -51,6 +62,9 @@ namespace BugCatcher.Web.Pages.Dashboard.Report
             {
                 return NotFound();
             }
+
+            CurrentBuild = buildService.GetBuild(Report.BuildId);
+            CurrentProduct = productService.GetProduct(CurrentBuild.ProductId);
             return Page();
         }
 
@@ -73,7 +87,7 @@ namespace BugCatcher.Web.Pages.Dashboard.Report
                     ex.Message);
             }
 
-            return Page();
+            return RedirectToPage(new { Id = Command.ReportId });
         }
     }
 }

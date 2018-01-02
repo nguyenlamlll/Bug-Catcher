@@ -31,7 +31,67 @@
             {
                 <div class="container">
                     <h4>@item.Name</h4>
-                    <p>Products: @item.NumberOfProducts</p>
+
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <p>Products: @item.NumberOfProducts  <i class="material-icons">work</i></p>
+                        </div>
+                        <div class="col-lg-2">
+                            <p>
+                                Employees: 2 <i class="material-icons">people</i>
+                                <a id="toggleAddUserModal" data-toggle="modal" data-target="#myModal">
+                                    <i class="material-icons">add_circle_outline</i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div id="myModal" class="modal fade" role="dialog" data-backdrop="false">
+                        <div class="modal-dialog modal-lg">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Add users to company</h4>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p>Select users to add into this company. Or create new accounts for them.</p>
+
+                                    <p>Add users</p>
+                                    <input id="inputEmails" type="text" spellcheck="false" style="width: 790px;"
+                                           placeholder="Enter an email here. Use semicolons to separate multiple email addresses." />
+
+                                    <p style="padding-top:2em;">Add to team/company</p>
+                                    <input type="text" value="@item.Name" style="width: 790px;"
+                                           disabled />
+                                </div>
+
+                                <div class="modal-footer">
+                                    @*<form asp-controller="Employee" asp-action="AddUsersToCompany"
+                                        asp-route-email="" asp-route-companyId="@item.Id"
+                                        method="post">*@
+                                    <button id="addUserButton" type="button" class="btn btn-default" data-dismiss="modal"
+                                            value="@item.Id">
+                                        Add
+                                    </button>
+                                    @*</form>*@
+
+                                    <button id="closeModalButton" type="button" class="btn btn-default" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--END Modal -->
+
+
                     <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@item.Id">
                         Edit
                     </a> |
@@ -52,3 +112,43 @@
     </section>
 
 </div>
+
+@section Scripts
+    {
+    <script type="text/javascript" src="~/lib/sweetalert2/dist/sweetalert2.all.js"></script>
+    <script>
+        //Close the add user to a company modal.
+        $(document).keyup(function (event) {
+            if (event.keyCode == 27) {
+                $('#closeModalButton').click();
+            }
+        });
+
+
+        $('#addUserButton').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "/api/employee/add-users",
+                data: {
+                    email: $('#inputEmails').val(),
+                    companyId: $(this).val()
+                },
+                success: function (result) {
+                    swal(
+                        'Added!',
+                        'The user is added to the team.',
+                        'success'
+                    );
+                },
+                error: function (result) {
+                    swal(
+                        'Error!',
+                        'Sorry, we could not add the user to the team. Please check the email and try again. Ensure there is an account exists under that mail.',
+                        'error'
+                    );
+                }
+            });
+        });
+    </script>
+}

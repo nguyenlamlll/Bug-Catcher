@@ -20,7 +20,10 @@ namespace BugCatcher.DAL.Implementation.Repositories
                                  where enrollments.UserId == enrollment.UserId && enrollments.CompanyId == enrollment.CompanyId
                                  select enrollments).SingleOrDefault();
             if (existedRecord == null)
+            {
                 dbContext.CompanyEnrollments.Add(enrollment);
+            }
+               
         }
 
         void ICompanyEnrollmentRepository.DeleteCompanyEnrollment(Guid id)

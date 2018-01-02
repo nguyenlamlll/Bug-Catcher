@@ -19,14 +19,19 @@ namespace BugCatcher.Web.Pages.Dashboard.Company
 
         private readonly IProductService productService;
         private readonly IUserService userService;
+        private readonly ICompanyService companyService;
         public IList<ProductQueryData> Products { get; set; }
         public IList<CompanyQueryData> Companies { get; set; }
 
-        public IndexModel(IProductService productService, IUserService userService, UserManager<ApplicationUser> userManager)
+        public IndexModel(IProductService productService, 
+            IUserService userService,
+            ICompanyService companyService,
+            UserManager<ApplicationUser> userManager)
         {
             this.productService = productService;
             this.userService = userService;
             this.userManager = userManager;
+            this.companyService = companyService;
         }
 
         
@@ -69,6 +74,12 @@ namespace BugCatcher.Web.Pages.Dashboard.Company
             }
            
             return Page();
+        }
+
+        public string Email { get; set; }
+        public void OnPost()
+        {
+
         }
     }
 }

@@ -22,6 +22,7 @@ namespace BugCatcher.Service.Models.Queries
             Reporter = new UserData(report.Reporter);
             ProductName = report.Build.Product.Name;
             BuildName = report.Build.Name;
+            BuildId = report.Build.Id;
         }
         #endregion
         public Guid Id { get; set; }
@@ -39,5 +40,7 @@ namespace BugCatcher.Service.Models.Queries
         public string ProductName { get; set; }
 
         public string BuildName { get; set; }
+
+        public Guid BuildId { get; set; }
     }
 }

@@ -2,13 +2,17 @@
 @model DetailsModel
 @{
     ViewData["Title"] = "Report Details";
-
+    ViewData["CurrentCompany"] = Model.CurrentProduct.Company.Name;
+    ViewData["CurrentCompanyId"] = Model.CurrentProduct.Company.Id;
 }
 
 
 <h2>Details</h2>
 <div class="container">
-    <h3>Bug Report #@Model.Report.Id.ToString().Split("-").ToList()[0]</h3>
+    @{
+        var reportId = Guid.Parse((Model.HttpContext.Request.Query["id"].ToString()));
+    }
+    <h3>Bug Report #@reportId.ToString().Split("-").ToList()[0]</h3>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -43,10 +47,11 @@
         </ul>
         <div class="tab-content">
             <div id="CommentTab" class="tab-pane fade in active">
-                <div class="row" style="padding-top:1em">
-                    @{
-                        foreach (var comment in Model.Comments)
-                        {
+
+                @{
+                    foreach (var comment in Model.Comments)
+                    {
+                        <div class="row" style="padding-top:1em">
                             <div class="col-lg-1">
                                 <button type="button" class="btn btn-sm btn-info" aria-label="Left Align">
                                     <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
@@ -59,9 +64,10 @@
                                 </p>
                                 <p class="">@comment.Content</p>
                             </div>
-                        }
+                        </div>
                     }
-                </div>
+                }
+
             </div>
 
             <div id="HistoryTab" class="tab-pane fade">

@@ -66,6 +66,24 @@ namespace BugCatcher.Service.Implementation
             throw new NotImplementedException();
         }
 
+        void ICompanyService.AddPersonToCompany(Guid userId, Guid companyId)
+        {
+            CompanyEnrollment enrollment = new CompanyEnrollment()
+            {
+                CompanyId = companyId,
+                UserId = userId,
+                IsCompanyCreator = false
+            };
+            companyEnrollmentRepository.CreateCompanyEnrollment(enrollment);
+            companyEnrollmentRepository.Save();
+        }
+
+        void ICompanyService.CreatePersonInCompany(Guid companyId)
+        {
+            throw new NotImplementedException();
+        }
+
+
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 

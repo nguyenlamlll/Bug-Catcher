@@ -24,32 +24,40 @@
     <div class="container">
         <div class="row" style="display: flex;  display: -webkit-flex; flex-wrap: wrap; padding-left:10rem;">
             @{
-                foreach (var report in Model.Reports)
+                if (!Model.Reports.Any())
                 {
-                    <div class="card col-md-4" style="width: 30rem;">
-                        <div class="card-header" data-background-color="red">
-                            <div class="category">
-                                Bug
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <h5 class="title">@report.Title</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@report.Id</h6>
-                            <p class="card-text">@report.Description</p>
-                            <a asp-page="/Dashboard/Report/Details" asp-route-id="@report.Id">
-                                See more&hellip;
-                            </a>
-                        </div>
-                        <div class="card-footer text-muted">
-                            <a href="#" class="btn btn-primary btn-sm">Resolve</a>
-                            <a href="#" class="btn btn-primary btn-sm">Comment</a>
-                            <div class="stats">
-                                <i class="material-icons">access_time</i> updated 4 minutes ago
-                            </div>
-                        </div>
-
-                    </div>
+                    <h5 style="padding-left:6em">It seems lonely here. Are you the first to bring in sadness?</h5>
                 }
+                else
+                {
+                    foreach (var report in Model.Reports)
+                    {
+                        <div class="card col-md-4" style="width: 30rem;">
+                            <div class="card-header" data-background-color="red">
+                                <div class="category">
+                                    Bug
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h5 class="title">@report.Title</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@report.Id</h6>
+                                <p class="card-text">@report.Description</p>
+                                <a asp-page="/Dashboard/Report/Details" asp-route-id="@report.Id">
+                                    See more&hellip;
+                                </a>
+                            </div>
+                            <div class="card-footer text-muted">
+                                <a href="#" class="btn btn-primary btn-sm">Resolve</a>
+                                <a href="#" class="btn btn-primary btn-sm">Comment</a>
+                                <div class="stats">
+                                    <i class="material-icons">access_time</i> updated 4 minutes ago
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+                }
+
             }
 
         </div>

@@ -19,5 +19,13 @@ namespace BugCatcher.Service.Abstraction
         CompanyQueryData GetCompany(Guid id);
 
         List<CompanyQueryData> GetCompany(CompanyFetchingFilter filter);
+
+        /// <summary>
+        /// Add an account with a given Id to a given company.
+        /// </summary>
+        /// <param name="id"></param>
+        void AddPersonToCompany(Guid userId, Guid companyId);
+
+        void CreatePersonInCompany(Guid companyId);
     }
 }
