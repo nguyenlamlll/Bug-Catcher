@@ -1,37 +1,21 @@
-## Welcome to GitHub Pages
+# Bug Catcher
 
-You can use the [editor on GitHub](https://github.com/nguyenlamlll/Bug-Catcher/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## Installation
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Build from source
+In order to build from source and run this web application locally, you need: Netcore 2.0 SDK and SQL Server.
 
-### Markdown
+1. Under `BugCatcher\BugCatcher.DALImplementation`, run the PowerShell script `dotnet restore`.
+2. And `dotnet ef database update` to create SQL database.
+3. Open the solution with Visual Studio.
+4. Build and run BugCatcher.Web project.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Note, check the connection string in `appsettings.json` and make sure the database name is correct (or you can use a dot "." as a database name).
 
-```markdown
-Syntax highlighted code block
+### Host locally with IIS
+Coming soon.
 
-# Header 1
-## Header 2
-### Header 3
+## Live Demo
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/nguyenlamlll/Bug-Catcher/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+The website is live at: bugcatcher-test.azurewebsites.net
+Create new accounts to test or log in with: empl_01@email.com | !Aa123456789
