@@ -5,10 +5,10 @@
 ### Build from source
 In order to build from source and run this web application locally, you need: Netcore 2.0 SDK and SQL Server.
 
-1. Under `BugCatcher\BugCatcher.DALImplementation`, run the PowerShell script `dotnet restore`.
-2. And `dotnet ef database update` to create SQL database.
-3. Open the solution with Visual Studio.
-4. Build and run BugCatcher.Web project.
+1. Under `BugCatcher\BugCatcher.Web` directory, run the PowerShell script `dotnet restore`. Next, `dotnet ef database update` to create SQL database.  
+1.1. Alternatively, you can run this command `Update-Database` in Package Manager Console inside Visual Studio. Remember to set default project to `BugCatcher.Web`
+2. Open the solution with Visual Studio 2017.
+3. Build and run BugCatcher.Web project.
 
 Note, check the connection string in `appsettings.json` and make sure the database name is correct (or you can use a dot "." as a database name).
 
